@@ -101,24 +101,25 @@
 
 
 
-  <meta name="description" content="我的技术（xue xi）博客">
+  <meta name="description" content="1.选择排序##排序过程选择排序大概是最容易理解的排序了，它的排序过程大概就是从数列中挑出最小的元素的和第一个元素交换，然后从剩下的元素中再挑出最小的和第二个元素交换，以此类推….换句话说，就是选出第一小的和a[1]换，第二小的和a[2]换，，，，最大的和最后一个换（划掉，没有自己和自己换的骚操作o_o ….）这个理解方式估计就是*选择排序*这个名字的来源了。听起来挺简单，其实在写的时候还是要很小">
+<meta name="keywords" content="算法,排序,java,总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="主流排序算法总结">
-<meta property="og:url" content="http://yoursite.com/2018/05/01/主流排序算法总结/index.html">
+<meta property="og:title" content="排序">
+<meta property="og:url" content="http://yoursite.com/2018/05/05/排序/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="我的技术（xue xi）博客">
+<meta property="og:description" content="1.选择排序##排序过程选择排序大概是最容易理解的排序了，它的排序过程大概就是从数列中挑出最小的元素的和第一个元素交换，然后从剩下的元素中再挑出最小的和第二个元素交换，以此类推….换句话说，就是选出第一小的和a[1]换，第二小的和a[2]换，，，，最大的和最后一个换（划掉，没有自己和自己换的骚操作o_o ….）这个理解方式估计就是*选择排序*这个名字的来源了。听起来挺简单，其实在写的时候还是要很小">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-01T11:29:11.838Z">
+<meta property="og:updated_time" content="2018-05-05T13:13:12.285Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="主流排序算法总结">
-<meta name="twitter:description" content="我的技术（xue xi）博客">
+<meta name="twitter:title" content="排序">
+<meta name="twitter:description" content="1.选择排序##排序过程选择排序大概是最容易理解的排序了，它的排序过程大概就是从数列中挑出最小的元素的和第一个元素交换，然后从剩下的元素中再挑出最小的和第二个元素交换，以此类推….换句话说，就是选出第一小的和a[1]换，第二小的和a[2]换，，，，最大的和最后一个换（划掉，没有自己和自己换的骚操作o_o ….）这个理解方式估计就是*选择排序*这个名字的来源了。听起来挺简单，其实在写的时候还是要很小">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/01/主流排序算法总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/05/排序/"/>
 
 
 
@@ -128,7 +129,7 @@
   };
 </script>
 
-  <title>主流排序算法总结 | 博主：Little-White</title>
+  <title>排序 | 博主：Little-White</title>
   
 
 
@@ -225,7 +226,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">1</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">5</span></a>
   </li>
         
         
@@ -300,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/主流排序算法总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李海龙">
@@ -317,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">主流排序算法总结
+          <h1 class="post-title" itemprop="name headline">排序
               
             
           </h1>
@@ -336,7 +337,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T19:29:11+08:00">2018-05-01</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-05T20:52:22+08:00">2018-05-05</time>
             
 
             
@@ -373,7 +374,18 @@
       
 
       
-        
+        <h1 id="1-选择排序"><a href="#1-选择排序" class="headerlink" title="1.选择排序"></a>1.选择排序</h1><p>##排序过程<br>选择排序大概是最容易理解的排序了，它的排序过程大概就是从数列中挑出最小的元素的和第一个元素交换，然后从剩下的元素中再挑出最小的和第二个元素交换，以此类推….<br>换句话说，就是<strong>选出</strong>第一小的和a[1]换，第二小的和a[2]换，，，，最大的和最后一个换（划掉，没有自己和自己换的骚操作o_o ….）这个理解方式估计就是<strong>*选择</strong>排序*这个名字的来源了。<br>听起来挺简单，其实在写的时候还是要很小心地规避bug的，废话不多说，下面贴出代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">        for(int i=0;i&lt;a.length;i++) &#123;</span><br><span class="line">            int smallest=i;</span><br><span class="line">            for(int j=i+1;j&lt;a.length;j++) &#123;</span><br><span class="line">                if(a[smallest].compareTo(a[j])&gt;0) smallest=j;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(i,smallest,a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>exch(int i1 , int i2 , Comparable[] a)是个交换数组内两个元素的方法，因为每种排序都会用到它，我会在最后贴出来。<br>代码量看起来还是很少的，但是程序的执行效率可不是代码的数量来决定的，下面分析一下选择排序的时间复杂度。</p>
+<p>##复杂度分析<br>选择排序的复杂度还是很好分析的，外层循环从0执行到n-1（n为数组元素数量）共n次，内层循环循环内容的执行次数不是固定的，但是有规律（$\sum_{i=0}^n$ci=c1+c2+c3+…+cn）/n,平均下来就是2/n。内层循环为2/n，外层是n，所以T=n*n/2。时间复杂度为：O(n^2)。平方级的效率，和后面介绍的几个比起来这个性能太差了，不过好处是易懂少代码，另一个好处是性能稳定，最优复杂度和最差复杂度都是都是O(n^2)。<br><span style="color:gray;font-size:small">ps：分析时只考虑了最高阶项，因为在数组规模趋于无穷的时候，整个程序的效率就差不多只和最高阶项有关了（详情请看微积分课本）</span></p>
+<p>#2.冒泡排序<br>冒泡排序还是去年学c语言的时候老师教的，算是我接触到的第一个算法吧。。当时看了好几遍才看懂原理，看懂之后又反复记了好几次才记住，感觉这东西很绕人，现在看来和后面提到的并归，快速排序比起来算是比较简单的排序了。</p>
+<p>##排序过程<br>冒泡排序的外循环从0到n-1共遍历n次，在循环内部会从后到前比较每对<strong>还未排序好的</strong>相邻元素（意味着每个元素都会比较两次），并且把较小的放在前面，这样每遍历一次，就会有一个在最边缘的元素被排序好，遍历n次后，n个元素就都排好序了。我的语言还是太苍白，还是代码有表现力些：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">       for(int i=0;i&lt;a.length-1;i++) &#123;</span><br><span class="line">           for(int j=a.length-1;j&gt;i;j--) &#123;</span><br><span class="line">               if(a[j].compareTo(a[j-1])&lt;0) exch(j,j-1,a);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>看上去是有点绕人，多看几遍就不别扭了。</p>
+<p>##复杂度分析<br>冒泡的复杂度和选择排序在比较次数上基本一致，差别就在<em>交换位置</em>的次数：选择排序的<em>交换位置</em>在外循环里面，而冒泡排序的<em>交换位置</em>在内循环里，这就导致了冒泡排序的交换次数要比选择排序多一个次方，不过这影响不大，因为我们只看最高阶，最高阶还是同一阶就没啥问题。所以冒泡排序的时间复杂度为O(n^2)。需要说明的是，冒泡排序的时间复杂度是和输入相关的，如果输入数组已经是有序的，那么它的它就只用比较而不用交换位置，复杂度为n^2/2,如果输入是倒序的，那么每个内循环都要执行交换位置，用的时间就会多出一个n^2/2。总的来说，冒泡排序还是性能还是不太好的，不知道为啥这个排序会成为小白的启蒙算法。</p>
+<p>#3.插入排序</p>
+<p>##排序过程<br>插入排序和冒泡很像，但它的效率要比冒泡高一些，它的排序过程就是从i=0 加到 i=a.length，对于每一个a[ i ]，程序都会将它与a[i-1]比较 (注意是a[ i ]和a[i-1]比，不是i和i-1比，这一点在代码中很容易出错)，如果a[i]&lt;a[i-1]，那么将他们俩交换位置，然后a[i-1]和a[i-2]比较,重复以上步骤，直到后面一个元素的值比前面一个要大，或者到达a[0]。<br>总觉得描述地不够清楚，还是直接上代码吧哈哈。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">    for(int i=1;i&lt;a.length;i++) &#123;</span><br><span class="line">        for(int j=i;j&gt;0&amp;&amp;a[j].compareTo(a[j-1])&lt;0;j--) </span><br><span class="line">            exch(j,j-1,a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个代码量好像更少，除去大括号程序头占行只有两三行了，但是效率的确比选择排序和冒泡提高了，下面来分析复杂度。</p>
+<p>##复杂度分析<br>真的受够了平方级的排序，插入排序的效率比起前两个似乎要好一些，代码第三行的 <code>a[j].compareTo(a[j-1])&lt;0</code>就是效率提升的关键，对于一个已经排好序的数列，它只需要线性时间n就能完成操作，但是对于一个倒序的数列，它就变得和选择排序一样需要n^2/2的时间了，所以它是渐进最优的。</p>
+
       
     </div>
 
@@ -390,6 +402,18 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/排序/" rel="tag"># 排序</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+        </div>
       
 
       
@@ -409,10 +433,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/01/测试专用文章/" rel="prev" title="测试专用文章">
-                测试专用文章 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -461,8 +481,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -498,7 +527,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -538,6 +575,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-选择排序"><span class="nav-number">1.</span> <span class="nav-text">1.选择排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
