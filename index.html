@@ -379,17 +379,16 @@
       
         
           
-            <h1 id="1-选择排序"><a href="#1-选择排序" class="headerlink" title="1.选择排序"></a>1.选择排序</h1><p>##排序过程<br>选择排序大概是最容易理解的排序了，它的排序过程大概就是从数列中挑出最小的元素的和第一个元素交换，然后从剩下的元素中再挑出最小的和第二个元素交换，以此类推….<br>换句话说，就是<strong>选出</strong>第一小的和a[1]换，第二小的和a[2]换，，，，最大的和最后一个换（划掉，没有自己和自己换的骚操作o_o ….）这个理解方式估计就是<strong>*选择</strong>排序*这个名字的来源了。<br>听起来挺简单，其实在写的时候还是要很小心地规避bug的，废话不多说，下面贴出代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">        for(int i=0;i&lt;a.length;i++) &#123;</span><br><span class="line">            int smallest=i;</span><br><span class="line">            for(int j=i+1;j&lt;a.length;j++) &#123;</span><br><span class="line">                if(a[smallest].compareTo(a[j])&gt;0) smallest=j;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(i,smallest,a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+            <h1 id="1-选择排序"><a href="#1-选择排序" class="headerlink" title="1.选择排序"></a>1.选择排序</h1><h2 id="排序过程"><a href="#排序过程" class="headerlink" title="排序过程"></a>排序过程</h2><p>选择排序大概是最容易理解的排序了，它的排序过程大概就是从数列中挑出最小的元素的和第一个元素交换，然后从剩下的元素中再挑出最小的和第二个元素交换，以此类推….<br>换句话说，就是<strong>选出</strong>第一小的和a[1]换，第二小的和a[2]换，，，，最大的和最后一个换（划掉，没有自己和自己换的骚操作o_o ….）这个理解方式估计就是<em> <strong>选择</strong>排序 </em>这个名字的来源了。<br>听起来挺简单，其实在写的时候还是要很小心地规避bug的，废话不多说，下面贴出代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">        for(int i=0;i&lt;a.length;i++) &#123;</span><br><span class="line">            int smallest=i;</span><br><span class="line">            for(int j=i+1;j&lt;a.length;j++) &#123;</span><br><span class="line">                if(a[smallest].compareTo(a[j])&gt;0) smallest=j;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(i,smallest,a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>exch(int i1 , int i2 , Comparable[] a)是个交换数组内两个元素的方法，因为每种排序都会用到它，我会在最后贴出来。<br>代码量看起来还是很少的，但是程序的执行效率可不是代码的数量来决定的，下面分析一下选择排序的时间复杂度。</p>
-<p>##复杂度分析<br>选择排序的复杂度还是很好分析的，外层循环从0执行到n-1（n为数组元素数量）共n次，内层循环循环内容的执行次数不是固定的，但是有规律（$\sum_{i=0}^n$ci=c1+c2+c3+…+cn）/n,平均下来就是2/n。内层循环为2/n，外层是n，所以T=n*n/2。时间复杂度为：O(n^2)。平方级的效率，和后面介绍的几个比起来这个性能太差了，不过好处是易懂少代码，另一个好处是性能稳定，最优复杂度和最差复杂度都是都是O(n^2)。<br><span style="color:gray;font-size:small">ps：分析时只考虑了最高阶项，因为在数组规模趋于无穷的时候，整个程序的效率就差不多只和最高阶项有关了（详情请看微积分课本）</span></p>
-<p>#2.冒泡排序<br>冒泡排序还是去年学c语言的时候老师教的，算是我接触到的第一个算法吧。。当时看了好几遍才看懂原理，看懂之后又反复记了好几次才记住，感觉这东西很绕人，现在看来和后面提到的并归，快速排序比起来算是比较简单的排序了。</p>
-<p>##排序过程<br>冒泡排序的外循环从0到n-1共遍历n次，在循环内部会从后到前比较每对<strong>还未排序好的</strong>相邻元素（意味着每个元素都会比较两次），并且把较小的放在前面，这样每遍历一次，就会有一个在最边缘的元素被排序好，遍历n次后，n个元素就都排好序了。我的语言还是太苍白，还是代码有表现力些：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">       for(int i=0;i&lt;a.length-1;i++) &#123;</span><br><span class="line">           for(int j=a.length-1;j&gt;i;j--) &#123;</span><br><span class="line">               if(a[j].compareTo(a[j-1])&lt;0) exch(j,j-1,a);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>选择排序的复杂度还是很好分析的，外层循环从0执行到n-1（n为数组元素数量）共n次，内层循环循环内容的执行次数不是固定的，但是有规律（ $\sum_{i=0}^n $ci=c1+c2+c3+…+cn）/n,平均下来就是2/n。内层循环为2/n，外层是n，所以T=n*n/2。时间复杂度为：O(n^2)。平方级的效率，和后面介绍的几个比起来这个性能太差了，不过好处是易懂少代码，另一个好处是性能稳定，最优复杂度和最差复杂度都是都是O(n^2)。<br><span style="color:gray;font-size:small">ps：分析时只考虑了最高阶项，因为在数组规模趋于无穷的时候，整个程序的效率就差不多只和最高阶项有关了（详情请看微积分课本）</span></p>
+<h1 id="2-冒泡排序"><a href="#2-冒泡排序" class="headerlink" title="2.冒泡排序"></a>2.冒泡排序</h1><p>冒泡排序还是去年学c语言的时候老师教的，算是我接触到的第一个算法吧。。当时看了好几遍才看懂原理，看懂之后又反复记了好几次才记住，感觉这东西很绕人，现在看来和后面提到的并归，快速排序比起来算是比较简单的排序了。</p>
+<h2 id="排序过程-1"><a href="#排序过程-1" class="headerlink" title="排序过程"></a>排序过程</h2><p>冒泡排序的外循环从0到n-1共遍历n次，在循环内部会从后到前比较每对<strong>还未排序好的</strong>相邻元素（意味着每个元素都会比较两次），并且把较小的放在前面，这样每遍历一次，就会有一个在最边缘的元素被排序好，遍历n次后，n个元素就都排好序了。我的语言还是太苍白，还是代码有表现力些：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">       for(int i=0;i&lt;a.length-1;i++) &#123;</span><br><span class="line">           for(int j=a.length-1;j&gt;i;j--) &#123;</span><br><span class="line">               if(a[j].compareTo(a[j-1])&lt;0) exch(j,j-1,a);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
 <p>看上去是有点绕人，多看几遍就不别扭了。</p>
-<p>##复杂度分析<br>冒泡的复杂度和选择排序在比较次数上基本一致，差别就在<em>交换位置</em>的次数：选择排序的<em>交换位置</em>在外循环里面，而冒泡排序的<em>交换位置</em>在内循环里，这就导致了冒泡排序的交换次数要比选择排序多一个次方，不过这影响不大，因为我们只看最高阶，最高阶还是同一阶就没啥问题。所以冒泡排序的时间复杂度为O(n^2)。需要说明的是，冒泡排序的时间复杂度是和输入相关的，如果输入数组已经是有序的，那么它的它就只用比较而不用交换位置，复杂度为n^2/2,如果输入是倒序的，那么每个内循环都要执行交换位置，用的时间就会多出一个n^2/2。总的来说，冒泡排序还是性能还是不太好的，不知道为啥这个排序会成为小白的启蒙算法。</p>
-<p>#3.插入排序</p>
-<p>##排序过程<br>插入排序和冒泡很像，但它的效率要比冒泡高一些，它的排序过程就是从i=0 加到 i=a.length，对于每一个a[ i ]，程序都会将它与a[i-1]比较 (注意是a[ i ]和a[i-1]比，不是i和i-1比，这一点在代码中很容易出错)，如果a[i]&lt;a[i-1]，那么将他们俩交换位置，然后a[i-1]和a[i-2]比较,重复以上步骤，直到后面一个元素的值比前面一个要大，或者到达a[0]。<br>总觉得描述地不够清楚，还是直接上代码吧哈哈。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">    for(int i=1;i&lt;a.length;i++) &#123;</span><br><span class="line">        for(int j=i;j&gt;0&amp;&amp;a[j].compareTo(a[j-1])&lt;0;j--) </span><br><span class="line">            exch(j,j-1,a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>冒泡的复杂度和选择排序在比较次数上基本一致，差别就在<em> 交换位置 </em>的次数：选择排序的<em> 交换位置 </em>在外循环里面，而冒泡排序的<em> 交换位置 </em>在内循环里，这就导致了冒泡排序的交换次数要比选择排序多一个次方，不过这影响不大，因为我们只看最高阶，最高阶还是同一阶就没啥问题。所以冒泡排序的时间复杂度为O(n^2)。需要说明的是，冒泡排序的时间复杂度是和输入相关的，如果输入数组已经是有序的，那么它的它就只用比较而不用交换位置，复杂度为n^2/2,如果输入是倒序的，那么每个内循环都要执行交换位置，用的时间就会多出一个n^2/2。总的来说，冒泡排序还是性能还是不太好的，不知道为啥这个排序会成为小白的启蒙算法。</p>
+<h1 id="3-插入排序"><a href="#3-插入排序" class="headerlink" title="3.插入排序"></a>3.插入排序</h1><h2 id="排序过程-2"><a href="#排序过程-2" class="headerlink" title="排序过程"></a>排序过程</h2><p>插入排序和冒泡很像，但它的效率要比冒泡高一些，它的排序过程就是从i=0 加到 i=a.length，对于每一个a[ i ]，程序都会将它与a[i-1]比较 (注意是a[ i ]和a[i-1]比，不是i和i-1比，这一点在代码中很容易出错)，如果a[i]&lt;a[i-1]，那么将他们俩交换位置，然后a[i-1]和a[i-2]比较,重复以上步骤，直到后面一个元素的值比前面一个要大，或者到达a[0]。<br>总觉得描述地不够清楚，还是直接上代码吧哈哈。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">    for(int i=1;i&lt;a.length;i++) &#123;</span><br><span class="line">        for(int j=i;j&gt;0&amp;&amp;a[j].compareTo(a[j-1])&lt;0;j--) </span><br><span class="line">            exch(j,j-1,a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这个代码量好像更少，除去大括号程序头占行只有两三行了，但是效率的确比选择排序和冒泡提高了，下面来分析复杂度。</p>
-<p>##复杂度分析<br>真的受够了平方级的排序，插入排序的效率比起前两个似乎要好一些，代码第三行的 <code>a[j].compareTo(a[j-1])&lt;0</code>就是效率提升的关键，对于一个已经排好序的数列，它只需要线性时间n就能完成操作，但是对于一个倒序的数列，它就变得和选择排序一样需要n^2/2的时间了，所以它是渐进最优的。</p>
+<h2 id="复杂度分析-2"><a href="#复杂度分析-2" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>真的受够了平方级的排序，插入排序的效率比起前两个似乎要好一些，代码第三行的 <code>a[j].compareTo(a[j-1])&lt;0</code>就是效率提升的关键，对于一个已经排好序的数列，它只需要线性时间n就能完成操作，但是对于一个倒序的数列，它就变得和选择排序一样需要n^2/2的时间了，所以它是渐进最优的。</p>
 
           
         
@@ -1137,6 +1136,23 @@
   
 
   
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
 
   
   
