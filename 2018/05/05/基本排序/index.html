@@ -105,12 +105,12 @@
 <meta name="keywords" content="算法,排序,java,总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基本排序">
-<meta property="og:url" content="http://yoursite.com/2018/05/05/排序/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/05/05/基本排序/index.html">
 <meta property="og:site_name" content="博主：Little-White">
 <meta property="og:description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/21elementary/images/h-sorted.png">
-<meta property="og:updated_time" content="2018-05-06T08:45:06.498Z">
+<meta property="og:updated_time" content="2018-05-06T08:48:36.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基本排序">
 <meta name="twitter:description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法">
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/05/排序/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/05/基本排序/"/>
 
 
 
@@ -303,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/基本排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李海龙">
@@ -402,10 +402,10 @@
 <blockquote>
 <p>No mathematical results are available about the average-case number of compares for shellsort for randomly ordered input.</p>
 </blockquote>
-<p>所以我不知道它的平均复杂度并不是我的能力问题(￣▽￣)”。下面总结一下这四种算法吧</p>
+<p>所以我不知道它的平均复杂度并不是我的能力问题(￣▽￣)。下面总结一下这四种算法吧</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>如果单论效率的话，他们的排名应该是：希尔&gt;插入&gt;选择&gt;冒泡，但是因为代码不同，它们的适用场景也会不一样，有些适用于部分排序好的，有些适用于有重复元素的（当然冒泡好像啥也不擅长ㄟ( ▔, ▔ )ㄏ）这就是这些为什么一个排序有这么多方式。通过上面的分析发现，这四种算法好处就是代码简单量少易懂，坏处就是性能不咋地，但还有更重要的特征我没有提到，就是<a href="https://baike.baidu.com/item/%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/9664257?fr=aladdin" target="_blank" rel="noopener">空间复杂度</a>的问题：它们做到了几乎原地排序，因为没有用到辅助数组，所以使用的额外内存都是常数级别，只需要几个index的整型量就行了。简单易懂的代码和不用操心的内存，意味着它可以用在嵌入式设备上，因为在嵌入式设备上内存和硬盘都是非常宝贵的，而且数组规模通常不会很大，这完美契合了这几种排序方法。</p>
 <hr>
-<p><span style="color:brown;font-size:small">声明：博客内容均来自于GitHub用户<code>LittleWhite-Hai</code>(李**)，转载免费，但是请告诉我一下</span></p>
+<p><span style="color:brown;font-size:small">声明：以上内容均来自于GitHub用户<code>LittleWhite-Hai</code>(李**)，转载免费，但是请告诉我一下</span></p>
 
       
     </div>
