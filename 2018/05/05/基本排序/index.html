@@ -101,19 +101,19 @@
 
 
 
-  <meta name="description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法大概有以下几种  选择排序 冒泡排序 插入排序 希尔排序 并归排序 快速排序">
+  <meta name="description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法大概有以下几种  选择排序 冒泡排序 插入排序 希尔排序 并归排序 快速排序  其中前四个是属于elementary sort,性能较弱，但是代码简单易于理解这也是这篇博客要讲到的四种，并归和快速内容可能比较多，放到下篇来写。">
 <meta name="keywords" content="算法,排序,java,总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基本排序">
 <meta property="og:url" content="http://yoursite.com/2018/05/05/基本排序/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法大概有以下几种  选择排序 冒泡排序 插入排序 希尔排序 并归排序 快速排序">
+<meta property="og:description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法大概有以下几种  选择排序 冒泡排序 插入排序 希尔排序 并归排序 快速排序  其中前四个是属于elementary sort,性能较弱，但是代码简单易于理解这也是这篇博客要讲到的四种，并归和快速内容可能比较多，放到下篇来写。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/21elementary/images/h-sorted.png">
-<meta property="og:updated_time" content="2018-05-06T11:29:38.437Z">
+<meta property="og:updated_time" content="2018-05-06T13:09:16.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基本排序">
-<meta name="twitter:description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法大概有以下几种  选择排序 冒泡排序 插入排序 希尔排序 并归排序 快速排序">
+<meta name="twitter:description" content="写在前面断断续续地终于把常见排序算法了解了个大概，现在来总结一下吧，主流的排序算法大概有以下几种  选择排序 冒泡排序 插入排序 希尔排序 并归排序 快速排序  其中前四个是属于elementary sort,性能较弱，但是代码简单易于理解这也是这篇博客要讲到的四种，并归和快速内容可能比较多，放到下篇来写。">
 <meta name="twitter:image" content="https://algs4.cs.princeton.edu/21elementary/images/h-sorted.png">
 
 
@@ -385,8 +385,7 @@
 <li>并归排序</li>
 <li>快速排序</li>
 </ul>
-<a id="more"></a>
-<p>其中前四个是属于elementary sort,性能较弱，但是代码简单易于理解<br>这也是这篇博客要讲到的四种，并归和快速内容可能比较多，放到下篇来写。</p>
+<p>其中前四个是属于elementary sort,性能较弱，但是代码简单易于理解<br>这也是这篇博客要讲到的四种，并归和快速内容可能比较多，放到下篇来写。<br><a id="more"></a></p>
 <h1 id="选择排序-Selection-sort"><a href="#选择排序-Selection-sort" class="headerlink" title="选择排序(Selection sort)"></a>选择排序(Selection sort)</h1><h2 id="排序过程"><a href="#排序过程" class="headerlink" title="排序过程"></a>排序过程</h2><p>选择排序大概是最容易理解的排序了，它的排序过程大概就是从数列中挑出最小的元素的和第一个元素交换，然后从剩下的元素中再挑出最小的和第二个元素交换，以此类推….<br>换句话说，就是<strong>选出</strong>第一小的和a<a href="https://algs4.cs.princeton.edu/21elementary/images/h-sorted.png" target="_blank" rel="noopener">1</a>换，第二小的和a[2]换，，，，最大的和最后一个换（划掉，没有自己和自己换的骚操作o_o ….）这个理解方式估计就是<em> <strong>选择</strong>排序 </em>这个名字的来源了。<br>听起来挺简单，其实在写的时候还是要很小心地规避bug的，废话不多说，下面贴出代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(T[] a) &#123;</span><br><span class="line">        for(int i=0;i&lt;a.length;i++) &#123;</span><br><span class="line">            int smallest=i;</span><br><span class="line">            for(int j=i+1;j&lt;a.length;j++) &#123;</span><br><span class="line">                if(a[smallest].compareTo(a[j])&gt;0) smallest=j;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(i,smallest,a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>exch(int i1 , int i2 , Comparable[] a)</code>是个交换数组内两个元素的方法，因为每种排序都会用到它，我会在最后贴出来。<br>代码量看起来还是很少的，但是程序的执行效率可不是代码的数量来决定的，下面分析一下选择排序的时间复杂度。</p>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>选择排序的复杂度还是很好分析的，外层循环从0执行到n-1（n为数组元素数量）共n次，内层循环循环内容的执行次数不是固定的，但是有规律（ $\sum_{i=0}^n $ci=c1+c2+c3+…+cn）/n,平均下来就是2/n。内层循环为2/n，外层是n，所以T=n*n/2。时间复杂度为：O(n^2)。平方级的效率，和后面介绍的几个比起来这个性能太差了，不过好处是易懂少代码，另一个好处是性能稳定，最优复杂度和最差复杂度都是都是O(n^2)。<br><span style="color:gray;font-size:small">ps：分析时只考虑了最高阶项，因为在数组规模趋于无穷的时候，整个程序的效率就差不多只和最高阶项有关了（详情请看微积分课本）</span></p>
