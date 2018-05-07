@@ -101,19 +101,21 @@
 
 
 
-  <meta name="description" content="施工中….">
+  <meta name="description" content="在上一篇把基础排序总结了一下，感觉很没有挑战性，还是对并归排序这种骚一点的排序算法更感兴趣哈哈。前面几种排序算法的流程大概都是由前到后，或者由后到前进行排序，而并归排序采用了分治（divid-and-conquer)的思想，顾名思义，“分治”就是分而治之，各个击破的意思，把一个大问题分解成足够小的问题，解决完各个小问题，大问题就自然解决了，听起来很炫酷，那么怎么把这种思想和排序结合在一起呢？请听我">
+<meta name="keywords" content="算法,排序,java,总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并归排序">
+<meta property="og:title" content="并归排序(Mergesort)">
 <meta property="og:url" content="http://yoursite.com/2018/05/06/并归排序/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="施工中….">
+<meta property="og:description" content="在上一篇把基础排序总结了一下，感觉很没有挑战性，还是对并归排序这种骚一点的排序算法更感兴趣哈哈。前面几种排序算法的流程大概都是由前到后，或者由后到前进行排序，而并归排序采用了分治（divid-and-conquer)的思想，顾名思义，“分治”就是分而治之，各个击破的意思，把一个大问题分解成足够小的问题，解决完各个小问题，大问题就自然解决了，听起来很炫酷，那么怎么把这种思想和排序结合在一起呢？请听我">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://img.sccnn.com/bimg/338/18441.jpg">
-<meta property="og:updated_time" content="2018-05-06T09:03:23.908Z">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/22mergesort/images/mergesort-overview.png">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fr30zsxcdoj31770lwn06.jpg">
+<meta property="og:updated_time" content="2018-05-07T12:29:33.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并归排序">
-<meta name="twitter:description" content="施工中….">
-<meta name="twitter:image" content="http://img.sccnn.com/bimg/338/18441.jpg">
+<meta name="twitter:title" content="并归排序(Mergesort)">
+<meta name="twitter:description" content="在上一篇把基础排序总结了一下，感觉很没有挑战性，还是对并归排序这种骚一点的排序算法更感兴趣哈哈。前面几种排序算法的流程大概都是由前到后，或者由后到前进行排序，而并归排序采用了分治（divid-and-conquer)的思想，顾名思义，“分治”就是分而治之，各个击破的意思，把一个大问题分解成足够小的问题，解决完各个小问题，大问题就自然解决了，听起来很炫酷，那么怎么把这种思想和排序结合在一起呢？请听我">
+<meta name="twitter:image" content="https://algs4.cs.princeton.edu/22mergesort/images/mergesort-overview.png">
 
 
 
@@ -130,7 +132,7 @@
   };
 </script>
 
-  <title>并归排序 | 博主：Little-White</title>
+  <title>并归排序(Mergesort) | 博主：Little-White</title>
   
 
 
@@ -319,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">并归排序
+          <h1 class="post-title" itemprop="name headline">并归排序(Mergesort)
               
             
           </h1>
@@ -375,9 +377,17 @@
       
 
       
-        <p><span style="color:brown;font-size:x-large">施工中….</span><br><a id="more"></a></p>
-<p><img src="http://img.sccnn.com/bimg/338/18441.jpg" alt="施工中"></p>
-
+        <p>在上一篇把基础排序总结了一下，感觉很没有挑战性，还是对并归排序这种骚一点的排序算法更感兴趣哈哈。前面几种排序算法的流程大概都是由前到后，或者由后到前进行排序，而并归排序采用了<a href="https://baike.baidu.com/item/%E5%88%86%E6%B2%BB/3029637" target="_blank" rel="noopener">分治</a>（divid-and-conquer)的思想，顾名思义，“分治”就是分而治之，各个击破的意思，把一个大问题分解成足够小的问题，解决完各个小问题，大问题就自然解决了，听起来很炫酷，那么怎么把这种思想和排序结合在一起呢？请听我慢慢道来(￣▽￣)”<br><a id="more"></a></p>
+<h1 id="排序过程"><a href="#排序过程" class="headerlink" title="排序过程"></a>排序过程</h1><p>讲的那么云里雾里的，其实并归就是把一个待排序的数组分成两个<strong>子数组</strong>各自排好序，然后把两个排好序的子数组合并（Merge）一下，整个数组就排好序了。说的倒是简单，那两个子数组用什么方法排序呢？当然是把<em>子数组</em>再分成<em>孙数组</em>进行排序啦，那孙数组怎么排序呢，当然是再分成。。。。说到这里我突然想到愚公移山当中的一句话：</p>
+<blockquote>
+<p>子又生孙，孙又生子；子又有子，子又有孙；子子孙孙无穷匮也。</p>
+</blockquote>
+<p>“子子孙孙无穷匮也”这句话有瑕疵，万一某一代出现了一个单身狗娶不到老婆不久没有后代了吗，所以子子孙孙还是有穷的，分数组也不是无穷的，等某个子数组分成单身狗（只包含一个元素)的时候，它也就到头了(* ￣︿￣)。<br>下面用图片来解释一下整个流程：<img src="https://algs4.cs.princeton.edu/22mergesort/images/mergesort-overview.png" alt="并归排序过程"><br>嗯，大概流程就是这样了。看起来不麻烦，其实代码是很长很难写的，有很多要注意的地方我都没有讲，只能在自己写的时候才能体会到了，下面是代码时间：</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">private static Comparable[] aux;    </span><br><span class="line">public static void sort(Comparable[] a) &#123;</span><br><span class="line">    aux=new Comparable[a.length];</span><br><span class="line">    int mid=a.length/2;</span><br><span class="line">    sort(0,mid,a);</span><br><span class="line">    sort(mid+1,a.length-1,a);</span><br><span class="line">    merge(0,mid,a.length-1,a);</span><br><span class="line">&#125;</span><br><span class="line">private static void sort(int lo,int hi,Comparable[] a) &#123;</span><br><span class="line">    if(hi-lo&lt;1) return;</span><br><span class="line">    int mid=lo+(hi-lo)/2;</span><br><span class="line">    sort(lo,mid,a);</span><br><span class="line">    sort(mid+1,hi,a);</span><br><span class="line">    merge(lo,mid,hi,a);</span><br><span class="line">&#125;</span><br><span class="line">private static void merge(int lo,int mid,int hi,Comparable[] a) &#123;</span><br><span class="line">    int le=lo,ri=mid+1;</span><br><span class="line">    for(int i=lo;i&lt;=hi;i++) aux[i]=a[i];</span><br><span class="line">    while(lo&lt;=hi) &#123;</span><br><span class="line">        if(le&gt;mid)                            a[lo++]=aux[ri++];</span><br><span class="line">        else if(ri&gt;hi)                        a[lo++]=aux[le++];</span><br><span class="line">        else if(aux[ri].compareTo(aux[le])&lt;0) a[lo++]=aux[ri++];</span><br><span class="line">        else                                  a[lo++]=aux[le++];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个算法的代码量比起基本算法多了很多，因为它用了三个函数互相配合，其实可以做一些修改和删减来减少一点代码量，但是我想展现的是并归的基本算法，而且这个版本是很practical和易懂的。<br>因为分治的思想很契合递归，所以在这里使用了递归而不是循环（第二个函数）。三个函数中，只有第一个是public的，也就是它暴露给别人使用，它的另一个身份就是递归的起振器，第二个函数<code>sort(int lo,int hi,Comparable[] a)</code>的功能是部署整个排序和合并流程的先后次序，第三个函数<code>merge(int lo,int mid,int hi,Comparable[] a)</code>就是整个并归排序的核心内容了，在18行中，它先将待排序数组复制到一个静态辅助aux[]中，然后，通过从左到右比较两个子数组元素(比较的是aux[ ]的元素)的方式来决定将哪一个子数组的元素放在较前面（放到a[ ]里)，哪个子数组的元素放进a[ ]里哪个子数组的索引就向右移动一格，直到某一个子数组的索引到达最右边，就把另一个子数组的剩下元素依次放进a[ ]。</p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>依循之前的习惯，复杂度依旧只分析最高阶。这个代码用的是外递归+内循环，依旧可以当作两个循环来看待（分析一共迭代了几圈，最后再和内循环次数乘起来），先上结论：并归函数的平均时间复杂度 <code>T(N)=O(N*lg N)</code> ,没错，它是线性对数级别的，终于突破了平方级的诅咒，更重要的是，它能保证在最坏的情况下还是线性对数级别的。下面来具体分析：<br>首先说明，这里的<code>lg N</code>是以2为底的，不是我们高中学的以10为底，为什么我不标明这是以2为底，不是因为我狂，而是大家好像都这么写 ￣へ￣ 。<br>那么开始说这个<code>lg</code>是从哪来的吧，没错就是控制递归的那个函数来的，它把数组无限分成两部分，直到子数组只含有一个元素，那么<code>N/2/2/2.../2</code> 除了几个2才会变成1 ？没错就是<code>lg N</code>。<br>至于内循环，因为每次要合并的数组长度都不一样，所以要引入<code>/2层次</code>（我自己编的名字），每次合并都有一个<code>/2层次</code>属性，第一次 /2就是第一层，第二次就是第二层，每层都会有n个元素，见下图 (触摸板作品，画的略差)<img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fr30zsxcdoj31770lwn06.jpg" alt="并归排序"><br>上图为排序[M,E,R,G,E,S,O,R,T,E,X,A,M,P,L,E]的轨迹，一共有三行线，代表三层，因为<code>lg 16=4</code>，最后元素数为1的一层不算，4-1=3。每行线都有n个元素，所以复杂度就为<code>O(N*lg N)</code>。</p>
+<h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>并归排序效率固然高，但是它有个致命弱点，就是空间复杂度：它需要线性于问题规模的空间！要知道，昨天介绍的几种基本排序都是常数级别的空间复杂度，以至于我根本没有写。和这个比起来，几种基本排序可以算是in-place了吧。这个额外的空间就来自于那个辅助数组aux[ ]，更重要的是，它还是静态量，这意味着client程序不能同时排序多个数组，当然，之后会对这一点进行优化，使它变成local的，但额外的存储空间的确是个硬伤，虽然大部分机器不太关心这个，但是多适配几种条件总是更好的。</p>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1>
       
     </div>
 
@@ -394,6 +404,18 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/排序/" rel="tag"># 排序</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+        </div>
       
 
       
@@ -461,8 +483,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -493,7 +524,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  <a href="/tags/随笔.html">
                     
                     
                       
@@ -546,6 +577,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#排序过程"><span class="nav-number">1.</span> <span class="nav-text">排序过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度分析"><span class="nav-number">3.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">3.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂度"><span class="nav-number">3.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">4.</span> <span class="nav-text">优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
