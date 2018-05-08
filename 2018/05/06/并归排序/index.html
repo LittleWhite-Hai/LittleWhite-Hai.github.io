@@ -111,7 +111,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/22mergesort/images/mergesort-overview.png">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fr30zsxcdoj31770lwn06.jpg">
-<meta property="og:updated_time" content="2018-05-08T08:39:28.275Z">
+<meta property="og:updated_time" content="2018-05-08T11:37:38.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并归排序(Mergesort)">
 <meta name="twitter:description" content="在上一篇把基础排序总结了一下，感觉很没有挑战性，还是对并归排序这种骚一点的排序算法更感兴趣哈哈。前面几种排序算法的流程大概都是由前到后，或者由后到前进行排序，而并归排序采用了分治（divid-and-conquer)的思想。顾名思义，“分治”就是分而治之，各个击破的意思，把一个大问题分解成足够小的问题，解决完各个小问题，大问题就自然解决了，听起来很炫酷，那么怎么把这种思想和排序结合在一起呢？且听我">
@@ -396,6 +396,8 @@
 <p>Eliminate the copy to the auxiliary array. It is possible to eliminate the time (but not the space) taken to copy to the auxiliary array used for merging. To do so, we use two invocations of the sort method, one that takes its input from the given array and puts the sorted output in the auxiliary array; the other takes its input from the auxiliary array and puts the sorted output in the given array. With this approach, in a bit of mindbending recursive trickery, we can arrange the recursive calls such that the computation switches the roles of the input array and the auxiliary array at each level.</p>
 </blockquote>
 <p>这是实现了三种优化的版本<a href="https://algs4.cs.princeton.edu/22mergesort/MergeX.java" target="_blank" rel="noopener">MergeX.java</a></p>
+<hr>
+<p><span style="color:brown;font-size:small">声明：以上内容均来自于GitHub用户<code>LittleWhite-Hai</code>(李**)，转载免费，但是请告诉我一下</span></p>
 
       
     </div>
@@ -537,7 +539,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  <a href="/tags/随笔.html">
                     
                     
                       
