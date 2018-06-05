@@ -102,7 +102,7 @@
 
 
   <meta name="description" content="快速排序同并归排序一样采用了分治的思想，但是速度要比并归快一些，这点从它的名字就可以看出来。但它还有个重要的性质就是：它是原地排序(相对并归排序),因为这两点，快速排序被评为“十大经典算法”之一。">
-<meta name="keywords" content="算法,排序,java,总结">
+<meta name="keywords" content="算法,排序,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速排序(Quicksort)">
 <meta property="og:url" content="http://yoursite.com/2018/05/08/快速排序-Quicksort/index.html">
@@ -112,7 +112,7 @@
 <meta property="og:image" content="https://algs4.cs.princeton.edu/23quicksort/images/quicksort-overview.png">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fr9rs5ki1ag307s05ytay.gif">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/23quicksort/images/partitioning3-overview.png">
-<meta property="og:updated_time" content="2018-05-15T12:14:10.348Z">
+<meta property="og:updated_time" content="2018-06-05T01:02:50.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速排序(Quicksort)">
 <meta name="twitter:description" content="快速排序同并归排序一样采用了分治的思想，但是速度要比并归快一些，这点从它的名字就可以看出来。但它还有个重要的性质就是：它是原地排序(相对并归排序),因为这两点，快速排序被评为“十大经典算法”之一。">
@@ -230,7 +230,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">5</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">4</span></a>
   </li>
         
         
@@ -238,7 +238,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">0</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">3</span></a>
   </li>
         
         
@@ -246,7 +246,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">6</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">7</span></a>
   </li>
         
         
@@ -351,6 +351,24 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/总结/" itemprop="url" rel="index"><span itemprop="name">总结</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -385,8 +403,8 @@
 <li>并归排序的拆分元素（partitioning element）会在数组中间，而快速排序的拆分元素落在哪里取决于输入数组。</li>
 </ol>
 <p>这是它的动态排序过程(这里的拆分元素选自数组末端）：<img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fr9rs5ki1ag307s05ytay.gif" alt="动态过程"></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public static void sort(Comparable[] a) &#123;</span><br><span class="line">       sort(0,a.length-1,a);</span><br><span class="line">   &#125;</span><br><span class="line">   private static void sort(int lo,int hi,Comparable[] a)&#123;</span><br><span class="line">       </span><br><span class="line">       if(hi&lt;=lo) return ;</span><br><span class="line">       int mid=partition(lo,hi,a);</span><br><span class="line">       sort(lo,mid-1,a);</span><br><span class="line">       sort(mid+1,hi,a);</span><br><span class="line">   &#125;</span><br><span class="line">   private static int partition(int lo,int hi ,Comparable[] a) &#123;</span><br><span class="line">       int le=lo;</span><br><span class="line">       int ri=hi+1;</span><br><span class="line">       while(true) &#123;</span><br><span class="line">           while(a[++le].compareTo(a[lo])&lt;=0)if(le==hi)break;</span><br><span class="line">           while(a[--ri].compareTo(a[lo])&gt;0) if(ri==lo)break;</span><br><span class="line">           if(le&gt;=ri)break;</span><br><span class="line">           exch(le,ri,a);       </span><br><span class="line">       &#125;</span><br><span class="line">       exch(lo,ri,a);</span><br><span class="line">       return ri;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>其实更多时候会在排序前用一个类似<code>shuffle()</code>的函数把数组打乱。为什么这样做呢，难道待排序的数组本来不就是乱序的吗？其实有很多时候待排序数组是部分有序（倒序）的，而这会很大程度上影响排序的效率（如果是完全有序或者倒序需要消耗平方级的时间），而<code>shuffle()</code>函数会将数组完全打乱，这样就可以安心作复杂度分析了。（居然还会有怕数组有序的排序算法哈哈）<br>需要提的一点就是<code>sort(int lo,int hi,Comparable[]a)</code>方法和merge的<code>sort</code>方法的区别：在快速排序中，函数先调用<code>partition(lo,hi,a)</code>再分别排序两个子数组，而并归排序则是先排序两个子数组，再调用 <code>merge(lo,mid,hi,a)</code>，这就是前面说的它们的第一条区别的来源。从栈的角度来看，快速排序是在入栈时排序的，而并归排序则是到达栈底之后，在出栈时进行排序。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">       sort(<span class="number">0</span>,a.length-<span class="number">1</span>,a);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> lo,<span class="keyword">int</span> hi,Comparable[] a)</span></span>&#123;</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">if</span>(hi&lt;=lo) <span class="keyword">return</span> ;</span><br><span class="line">       <span class="keyword">int</span> mid=partition(lo,hi,a);</span><br><span class="line">       sort(lo,mid-<span class="number">1</span>,a);</span><br><span class="line">       sort(mid+<span class="number">1</span>,hi,a);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> lo,<span class="keyword">int</span> hi ,Comparable[] a)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> le=lo;</span><br><span class="line">       <span class="keyword">int</span> ri=hi+<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">           <span class="keyword">while</span>(a[++le].compareTo(a[lo])&lt;=<span class="number">0</span>)<span class="keyword">if</span>(le==hi)<span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">while</span>(a[--ri].compareTo(a[lo])&gt;<span class="number">0</span>) <span class="keyword">if</span>(ri==lo)<span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">if</span>(le&gt;=ri)<span class="keyword">break</span>;</span><br><span class="line">           exch(le,ri,a);       </span><br><span class="line">       &#125;</span><br><span class="line">       exch(lo,ri,a);</span><br><span class="line">       <span class="keyword">return</span> ri;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>其实更多时候会在排序前用一个类似<code>shuffle()</code>的函数把数组打乱，为什么这样做呢，难道待排序的数组本来不就是乱序的吗？其实有很多时候待排序数组是部分有序（倒序）的，而这会很大程度上影响排序的效率（如果是完全有序或者倒序需要消耗平方级的时间），而<code>shuffle()</code>函数会将数组完全打乱，这样就可以安心作复杂度分析了。（居然还会有怕数组有序的排序算法哈哈）<br>需要提的一点就是<code>sort(int lo,int hi,Comparable[]a)</code>方法和merge的<code>sort</code>方法的区别：在快速排序中，函数先调用<code>partition(lo,hi,a)</code>再分别排序两个子数组，而并归排序则是先排序两个子数组，再调用 <code>merge(lo,mid,hi,a)</code>，这就是前面说的它们的第一条区别的来源。从栈的角度来看，快速排序是在入栈时排序的，而并归排序则是到达栈底之后，在出栈时进行排序。</p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>由于算法的性能和切分的好坏有关，而切分的好坏与选的切分元素有关，而切分元素选得好坏又看脸，所以只能求助一波概率学了，但是书上讲的一堆公式又看不懂+没耐心，只能记结论了(来自一枚数学学渣的妥协）。不过可以知道的是快速排序在最好的情况下（每次都是55开切分，递归深度为lg n，每层比较n次）复杂度为<code>n*lg n</code>，最差情况下(数组已经排好序或者倒序，每次递归只能前进一个元素，递归深度为n，平均每次比较次数为n/2)复杂度为<code>n*n&lt;sup&gt;2&lt;/sup&gt;</code>,这样平均复杂度就约为<code>1.39n*lg n</code>，这样算下来不太严谨，但大体上就是这样了。<br>之前说过，快速排序没有用到额外的空间，所以空间复杂度就没必要分析了。</p>
 <h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="排序小数组用插入排序代替"><a href="#排序小数组用插入排序代替" class="headerlink" title="排序小数组用插入排序代替"></a>排序小数组用插入排序代替</h2><p>和并归排序一样，在小数组面前，还是插入排序速度快（大小为5-15的都算小数组）。</p>
 <h2 id="三取样切分"><a href="#三取样切分" class="headerlink" title="三取样切分"></a>三取样切分</h2><p>前面说过很多次，快速排序的最怕的就是切分元素是最小值或者最大值，针对这一点，可以取三个样本，再从中选出一个中值作为切分元素。这样做还有一个好处就是可以略去代码第15，16行的边际检查，因为只有在切分元素为最值的时候，指针le和ri才会越界，而三取样的中值一定不是整个数组的最值。</p>
@@ -419,8 +437,6 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/总结/" rel="tag"># 总结</a>
-          
         </div>
       
 
@@ -441,6 +457,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/04/查找共线点/" rel="prev" title="查找共线点(Collinear Points)">
+                查找共线点(Collinear Points) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -518,12 +538,29 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
 
               
@@ -541,9 +578,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

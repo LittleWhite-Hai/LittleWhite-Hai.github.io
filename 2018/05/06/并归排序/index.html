@@ -102,7 +102,7 @@
 
 
   <meta name="description" content="在上一篇把基础排序总结了一下，感觉很没有挑战性，还是对并归排序这种骚一点的排序算法更感兴趣哈哈。前面几种排序算法的流程大概都是由前到后，或者由后到前进行排序，而并归排序采用了分治（divid-and-conquer)的思想。顾名思义，“分治”就是分而治之，各个击破的意思，把一个大问题分解成足够小的问题，解决完各个小问题，大问题就自然解决了，听起来很炫酷，那么怎么把这种思想和排序结合在一起呢？且听我">
-<meta name="keywords" content="算法,排序,java,总结">
+<meta name="keywords" content="算法,排序,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并归排序(Mergesort)">
 <meta property="og:url" content="http://yoursite.com/2018/05/06/并归排序/index.html">
@@ -111,7 +111,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/22mergesort/images/mergesort-overview.png">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fr30zsxcdoj31770lwn06.jpg">
-<meta property="og:updated_time" content="2018-05-08T11:37:38.657Z">
+<meta property="og:updated_time" content="2018-06-05T01:01:22.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并归排序(Mergesort)">
 <meta name="twitter:description" content="在上一篇把基础排序总结了一下，感觉很没有挑战性，还是对并归排序这种骚一点的排序算法更感兴趣哈哈。前面几种排序算法的流程大概都是由前到后，或者由后到前进行排序，而并归排序采用了分治（divid-and-conquer)的思想。顾名思义，“分治”就是分而治之，各个击破的意思，把一个大问题分解成足够小的问题，解决完各个小问题，大问题就自然解决了，听起来很炫酷，那么怎么把这种思想和排序结合在一起呢？且听我">
@@ -229,7 +229,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">5</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">4</span></a>
   </li>
         
         
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">0</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">3</span></a>
   </li>
         
         
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">6</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">7</span></a>
   </li>
         
         
@@ -350,6 +350,24 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/总结/" itemprop="url" rel="index"><span itemprop="name">总结</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -383,13 +401,13 @@
 <p>子又生孙，孙又生子；子又有子，子又有孙；子子孙孙无穷匮也。</p>
 </blockquote>
 <p>“子子孙孙无穷匮也”这句话有瑕疵，万一某一代出现了一个单身狗娶不到老婆不就没有后代了吗，所以子子孙孙还是有穷的，分数组也不是无穷的，等某个子数组分成单身狗（只包含一个元素)的时候，它也就到头了(* ￣︿￣)。<br>下面用图片来解释一下整个流程：<img src="https://algs4.cs.princeton.edu/22mergesort/images/mergesort-overview.png" alt="并归排序过程"><br>嗯，大概流程就是这样了。看起来不麻烦，其实代码是比较麻烦的的，有很多要注意的地方我都没有讲，只能在自己写的时候才能体会到了，下面是代码时间：</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">private static Comparable[] aux;    </span><br><span class="line">public static void sort(Comparable[] a) &#123;</span><br><span class="line">    aux=new Comparable[a.length];</span><br><span class="line">    int mid=a.length/2;</span><br><span class="line">    sort(0,mid,a);</span><br><span class="line">    sort(mid+1,a.length-1,a);</span><br><span class="line">    merge(0,mid,a.length-1,a);</span><br><span class="line">&#125;</span><br><span class="line">private static void sort(int lo,int hi,Comparable[] a) &#123;</span><br><span class="line">    if(hi-lo&lt;1) return;</span><br><span class="line">    int mid=lo+(hi-lo)/2;</span><br><span class="line">    sort(lo,mid,a);</span><br><span class="line">    sort(mid+1,hi,a);</span><br><span class="line">    merge(lo,mid,hi,a);</span><br><span class="line">&#125;</span><br><span class="line">private static void merge(int lo,int mid,int hi,Comparable[] a) &#123;</span><br><span class="line">    int le=lo,ri=mid+1;</span><br><span class="line">    for(int i=lo;i&lt;=hi;i++) aux[i]=a[i];</span><br><span class="line">    while(lo&lt;=hi) &#123;</span><br><span class="line">        if(le&gt;mid)                            a[lo++]=aux[ri++];</span><br><span class="line">        else if(ri&gt;hi)                        a[lo++]=aux[le++];</span><br><span class="line">        else if(aux[ri].compareTo(aux[le])&lt;0) a[lo++]=aux[ri++];</span><br><span class="line">        else                                  a[lo++]=aux[le++];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Comparable[] aux;    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">    aux=<span class="keyword">new</span> Comparable[a.length];</span><br><span class="line">    <span class="keyword">int</span> mid=a.length/<span class="number">2</span>;</span><br><span class="line">    sort(<span class="number">0</span>,mid,a);</span><br><span class="line">    sort(mid+<span class="number">1</span>,a.length-<span class="number">1</span>,a);</span><br><span class="line">    merge(<span class="number">0</span>,mid,a.length-<span class="number">1</span>,a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> lo,<span class="keyword">int</span> hi,Comparable[] a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(hi-lo&lt;<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> mid=lo+(hi-lo)/<span class="number">2</span>;</span><br><span class="line">    sort(lo,mid,a);</span><br><span class="line">    sort(mid+<span class="number">1</span>,hi,a);</span><br><span class="line">    merge(lo,mid,hi,a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> lo,<span class="keyword">int</span> mid,<span class="keyword">int</span> hi,Comparable[] a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> le=lo,ri=mid+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=lo;i&lt;=hi;i++) aux[i]=a[i];</span><br><span class="line">    <span class="keyword">while</span>(lo&lt;=hi) &#123;</span><br><span class="line">        <span class="keyword">if</span>(le&gt;mid)                            a[lo++]=aux[ri++];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ri&gt;hi)                        a[lo++]=aux[le++];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(aux[ri].compareTo(aux[le])&lt;<span class="number">0</span>) a[lo++]=aux[ri++];</span><br><span class="line">        <span class="keyword">else</span>                                  a[lo++]=aux[le++];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个算法的代码量比起基本排序算法多了很多，因为它用了三个函数互相配合，其实可以做一些修改和删减来减少一点代码量，但是我想展现的是并归的基本算法，而且这个版本是很practical和易懂的。<br>因为分治的思想很契合递归，所以在这里使用了递归而不是循环（第二个函数）。三个函数中，只有第一个是public的，也就是它暴露给调用者使用，它的另一个身份就是递归的起振器，第二个函数<code>sort(int lo,int hi,Comparable[] a)</code>的功能是部署整个排序和合并流程的先后次序，第三个函数<code>merge(int lo,int mid,int hi,Comparable[] a)</code>就是整个并归排序的核心内容了，在18行中，它先将待排序数组复制到一个静态辅助aux[]中，然后，通过从左到右比较两个子数组元素(比较的是aux[ ]的元素)的方式来决定将哪一个子数组的元素放在较前面（放到a[ ]里)，哪个子数组的元素放进a[ ]里哪个子数组的索引就向右移动一格，直到某一个子数组的索引到达最右边，就把另一个子数组的剩下元素依次放进a[ ]。</p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>依循之前的习惯，复杂度依旧只分析最高阶。这个代码用的是外递归+内循环，依旧可以当作两个循环来看待（分析一共迭代了几圈，最后再和内循环次数乘起来），先上结论：并归函数的平均时间复杂度 <code>T(N)=O(N*lg N)</code> ,没错，它是线性对数级别的，终于突破了平方级的诅咒，更重要的是，它能保证在最坏的情况下还是线性对数级别的。下面来具体分析：<br>首先说明，这里的<code>lg N</code>是以2为底的，不是我们高中学的以10为底，为什么我不标明这是以2为底，不是因为我狂，而是大家好像都这么写 ￣へ￣ 。<br>那么开始说这个<code>lg</code>是从哪来的吧，没错就是控制递归的那个函数来的，它把数组无限分成两部分，直到子数组只含有一个元素，那么<code>N/2/2/2.../2</code> 除了几个2才会变成1 ？没错就是<code>lg N</code>。<br>至于内循环，因为每次要合并的数组长度都不一样，所以要引入<code>/2层次</code>（我自己编的名字），每次合并都有一个<code>/2层次</code>属性，第一次 /2就是第一层，第二次就是第二层，每层都会有n个元素，见下图 (触摸板作品，画的略差)<img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fr30zsxcdoj31770lwn06.jpg" alt="并归排序"><br>上图为排序[M,E,R,G,E,S,O,R,T,E,X,A,M,P,L,E]的轨迹，一共有三行线，代表三层，因为<code>lg 16=4</code>，最后元素数为1的一层不算，4-1=3。每行线都有n个元素，所以复杂度就为<code>O(N*lg N)</code>。</p>
 <h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><p>并归排序效率固然高，但是它有个致命弱点，就是空间复杂度：它需要线性于问题规模的空间！要知道，昨天介绍的几种基本排序都是常数级别的空间复杂度，以至于我根本没有写。和这个比起来，几种基本排序可以算是in-place了吧。这个额外的空间就来自于那个辅助数组aux[ ]，更重要的是，它还是静态量，这意味着client程序不能同时排序多个数组，当然，有一种办法可以对这一点进行优化，使它变成local的，但额外的存储空间的确是个硬伤，虽然大部分机器不太关心这个，但是多适配几种条件总是更好的。</p>
 <h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>有梦想的程序员不会因为线性平方级别就止步的，于是大家又对并归排序进行了改良：</p>
 <h2 id="小数组使用插入排序"><a href="#小数组使用插入排序" class="headerlink" title="小数组使用插入排序"></a>小数组使用插入排序</h2><p>众所周知，当问题规模趋于无穷的时候，增长速度函数的因数和低次项就可以忽略，只关心它的增长级别就行(是N<sup>2</sup>还是N还是N<em>lg N，或是其他什么)。但是，①</em>当问题规模没有那么大时，运行时间又不能忽略因数和低次项了<em>。在并归排序中，我们解决问题的关键就在于把大规模问题分解为小规模问题，②</em>问题规模越大，分解出来的小规模问题就越多。<em><br>那么，对于小规模问题，并归是否比选择或者插入排序高效呢？答案是</em>当数组元素个数小于15时，插入排序或者选择排序要比并归排序高效*<br>所以我们可以在代码中加一条判断语句，当<code>hi-lo&lt;15</code>时，采用插入排序，做完这一步，代码的性能又会提升 10%~15%。</p>
-<h2 id="合并前检查是否已经有序"><a href="#合并前检查是否已经有序" class="headerlink" title="合并前检查是否已经有序"></a>合并前检查是否已经有序</h2><p>你可能会感觉检查数组是否有序要遍历整个数组，会不会很浪费时间，因为常规的判断有序代码是这样的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private static boolean isSorted(Comparable[] a)&#123;</span><br><span class="line">    for(int i=0;i&lt;a.length-1;i++)&#123;</span><br><span class="line">        if(a[i].compareTo(a[i+1]&gt;0) return false;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="合并前检查是否已经有序"><a href="#合并前检查是否已经有序" class="headerlink" title="合并前检查是否已经有序"></a>合并前检查是否已经有序</h2><p>你可能会感觉检查数组是否有序要遍历整个数组，会不会很浪费时间，因为常规的判断有序代码是这样的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isSorted</span><span class="params">(Comparable[] a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i].compareTo(a[i+<span class="number">1</span>]&gt;<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>显然，在正常环境下，要想知道整个数组是否有序，要浪费线性的时间。但是，在合并之前判断只需要常数的时间，这是因为前后两个子数组都是默认有序的，所以只要前一个数组的最大(<code>mid</code>)的比后一个数组的最小的(<code>mid+1</code>)还要小，那么两个子数组就是有序的了。做完这一步，面对一个已经有序的数组，对它进行排序就只需要线性的时间了。</p>
 <h2 id="省略复制到辅助数组的时间"><a href="#省略复制到辅助数组的时间" class="headerlink" title="省略复制到辅助数组的时间"></a>省略复制到辅助数组的时间</h2><p>这里我偷了个懒，没有看<del>懂</del>它，因为它很绕人，我想我还是要保护一下我的脑细胞，如果以后经常碰到这种情形再去了解。感兴趣的朋友可以看算法四中的这一段话(原谅我找不到中文版本)</p>
 <blockquote>
@@ -423,8 +441,6 @@
             <a href="/tags/排序/" rel="tag"># 排序</a>
           
             <a href="/tags/java/" rel="tag"># java</a>
-          
-            <a href="/tags/总结/" rel="tag"># 总结</a>
           
         </div>
       
@@ -527,12 +543,29 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
 
               
@@ -550,9 +583,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

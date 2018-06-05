@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+  <link rel="manifest" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="真香！">
+<meta name="keywords" content="-算法 -java -排序 -图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查找共线点(Collinear Points)">
+<meta property="og:url" content="http://yoursite.com/2018/06/04/查找共线点/index.html">
+<meta property="og:site_name" content="博主：Little-White">
+<meta property="og:description" content="真香！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fryy8qpbpmj31hc0u0q9g.jpg">
+<meta property="og:image" content="http://coursera.cs.princeton.edu/algs4/assignments/lines2.png">
+<meta property="og:image" content="http://coursera.cs.princeton.edu/algs4/assignments/lines1.png">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUngy1frzfx9u6qmj30uz06qgm7.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/005PyLUngy1frzfzywjsoj30s808hmy8.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUngy1frzimts80gj30uc0ii775.jpg">
+<meta property="og:updated_time" content="2018-06-05T01:00:38.069Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="查找共线点(Collinear Points)">
+<meta name="twitter:description" content="真香！">
+<meta name="twitter:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fryy8qpbpmj31hc0u0q9g.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/04/查找共线点/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>查找共线点(Collinear Points) | 博主：Little-White</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博主：Little-White</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"><p <imag src="https://wx3.sinaimg.cn/mw690/005PyLUnly1fqcf8cxnp2j30hs0hsjrz.jpg" width="10"> </p></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">4</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">3</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">7</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-联系我">
+    <a href="/contact.html" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-phone"></i> <br />联系我</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/查找共线点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李海龙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博主：Little-White">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">查找共线点(Collinear Points)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T10:23:16+08:00">2018-06-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/作业报告/" itemprop="url" rel="index"><span itemprop="name">作业报告</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>真香！<br><a id="more"></a><br>没错，一个月之后我又来coursera了，这一个月我在书上刚刚把符号表看完，本来想做作业，但是发现作业量实在太大（一章的题目全做完半个月都不一定行），看知乎上的人说只用挑官网上的基础题做就行了，跑到官网上看又觉得题目太少太简单，然后我又陷入了纠结，思前想后还是回到coursera的怀抱吧，于是接着上次的并归排序的题目又开始做作业了。因为一个月之前已经做了一些了，这次只用了 一天+一上午 就把作业做到了一百分（第一个一百分，真的很激动！）<img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fryy8qpbpmj31hc0u0q9g.jpg" alt="grade"></p>
+<p>这次的作业总体感受不错，作业要求虽然很苛刻，但是的确学到了不少东西（感觉更多的是设计规范而不是排序算法），估计每个作业大概要做5-6天，然后作业总结要写2-3天，我再往后做两个看看，如果难度实在无法接受的话，我还是要做书上的题目。。。<br>下面进入正题！</p>
+<h1 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h1><blockquote>
+<p>Given a set of n distinct points in the plane, find every (maximal) line segment that connects a subset of 4 or more of the points.</p>
+</blockquote>
+<p> <img src="http://coursera.cs.princeton.edu/algs4/assignments/lines2.png" alt="coordinates">   我来机翻一下：在一个平面中给定n个点，找到每个含有四个点或更多点的子集组成的线段。</p>
+<p> 要完成上面的要求，题目给出了两个数据结构，分别是Point和LineSegment。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Point</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Point</span>&gt; </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Point</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span>  <span class="comment">// constructs the point (x, y)</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span>   <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span>  <span class="comment">// draws this point</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span>   <span class="keyword">void</span> <span class="title">drawTo</span><span class="params">(Point that)</span></span></span><br><span class="line"><span class="function">   <span class="comment">// draws the line segment from this point to that point</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span>  <span class="comment">// string representation</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span>               <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Point that)</span>     <span class="comment">// compare two points by y-coordinates, breaking ties by x-coordinates</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span>            <span class="keyword">double</span> <span class="title">slopeTo</span><span class="params">(Point that)</span>       </span></span><br><span class="line"><span class="function">   <span class="comment">// the slope between this point and that point</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> Comparator&lt;Point&gt; <span class="title">slopeOrder</span><span class="params">()</span>            </span></span><br><span class="line"><span class="function">   <span class="comment">// compare two points by slopes they make with this point</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>后三个方法是要我们写的，篇幅有限，不能具体说明。细节要求请看<a href="http://coursera.cs.princeton.edu/algs4/assignments/collinear.html" target="_blank" rel="noopener">specification</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LineSegment</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">LineSegment</span><span class="params">(Point p, Point q)</span>       </span></span><br><span class="line"><span class="function">   <span class="comment">// constructs the line segment between points p and q</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span>   <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span>  <span class="comment">// draws this line segment</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span>  <span class="comment">// string representation</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>LineSegment 不用动它，这是已经实现好的<br>Point和LineSegment是点和线的表示方法，下面是解决问题的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BruteCollinearPoints</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">BruteCollinearPoints</span><span class="params">(Point[] points)</span>   </span></span><br><span class="line"><span class="function">   <span class="comment">// finds all line segments containing 4 points</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span>           <span class="keyword">int</span> <span class="title">numberOfSegments</span><span class="params">()</span>       </span></span><br><span class="line"><span class="function">   <span class="comment">// the number of line segments</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> LineSegment[] <span class="title">segments</span><span class="params">()</span>   <span class="comment">// the line segments</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>暴力解法，这种解法会检查每一组四点线段，然后判断每是否共线，segments()会返回一个LineSegment数组，这个数组包含了每一个四点共线的线段，并且不允许重复，如果线段是A&gt;B&gt;C&gt;D，那么数组只能包含A&gt;D或者D&gt;A，这两个线段其中之一，而不能包含子线段比如A&gt;C,或者B&gt;D。<br>性能要求:运行时间n<sup>4</sup>，内存使用与n成正比。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FastCollinearPoints</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">FastCollinearPoints</span><span class="params">(Point[] points)</span>     </span></span><br><span class="line"><span class="function">   <span class="comment">// finds all line segments containing 4 or more points</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span>           <span class="keyword">int</span> <span class="title">numberOfSegments</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   <span class="comment">// the number of line segments</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> LineSegment[] <span class="title">segments</span><span class="params">()</span>  <span class="comment">// the line segments</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>快速版本：这种解法可以分成四步</p>
+<ol>
+<li>把p点看作初始点</li>
+<li>对于每一个q，将他们按照与p点的斜率大小排序</li>
+<li>遍历排序好的数组，如果连续的三个（或更多）q与p的斜率相同，则这三个点（或更多）与p就是共线的</li>
+<li>对于每一个点，循环1，2，3步骤。</li>
+</ol>
+<p><img src="http://coursera.cs.princeton.edu/algs4/assignments/lines1.png" alt="coordinates2"><br>快速解法的API和暴力解法一样，不过它支持4个以上的点共线，细节要求请见<a href="http://coursera.cs.princeton.edu/algs4/assignments/collinear.html" target="_blank" rel="noopener">specification</a><br>性能要求：时间要求为n<sup>2</sup>*log n，空间要求和n成正比</p>
+<h1 id="作业内容"><a href="#作业内容" class="headerlink" title="作业内容"></a>作业内容</h1><h2 id="Point"><a href="#Point" class="headerlink" title="Point"></a>Point</h2><p>Point 太简单了，不写了好吧。</p>
+<h2 id="BruteCollinearPoints"><a href="#BruteCollinearPoints" class="headerlink" title="BruteCollinearPoints"></a>BruteCollinearPoints</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.In;</span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.Quick3way;</span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.Stack;</span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.StdDraw;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BruteCollinearPoints</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Stack&lt;LineSegment&gt; lines;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numberIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BruteCollinearPoints</span><span class="params">(Point[] ppp)</span> </span>&#123; <span class="comment">// finds all line segments containing 4 points</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ppp == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">        Point[] points = <span class="keyword">new</span> Point[ppp.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ppp.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (ppp[i] == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">            points[i] = ppp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        Quick3way.sort(points);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; points.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (points[i].compareTo(points[i + <span class="number">1</span>]) == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        lines = <span class="keyword">new</span> Stack&lt;LineSegment&gt;();</span><br><span class="line">        <span class="keyword">int</span> n = points.length;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">4</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> first = <span class="number">0</span>; first &lt; n - <span class="number">3</span>; first++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> second = first + <span class="number">1</span>; second &lt; n - <span class="number">2</span>; second++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> third = second + <span class="number">1</span>; third &lt; n - <span class="number">1</span>; third++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> fourth = third + <span class="number">1</span>; fourth &lt; n; fourth++) &#123;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span> (isCollinearPoints(points[first], points[second], points[third], points[fourth])) &#123;</span><br><span class="line">                            lines.push(<span class="keyword">new</span> LineSegment(points[first], points[fourth]));</span><br><span class="line">                            numberIndex++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// recursion(0, 1, 2, 3, points);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isCollinearPoints</span><span class="params">(Point p0, Point p1, Point p2, Point p3)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (p0.slopeTo(p1) == p1.slopeTo(p2) &amp;&amp; p1.slopeTo(p2) == p2.slopeTo(p3))</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfSegments</span><span class="params">()</span> </span>&#123; <span class="comment">// the number of line segments</span></span><br><span class="line">        <span class="keyword">return</span> numberIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> LineSegment[] segments() &#123; <span class="comment">// the line segments</span></span><br><span class="line"></span><br><span class="line">        LineSegment[] tmp = <span class="keyword">new</span> LineSegment[numberIndex];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (LineSegment li : lines) &#123;</span><br><span class="line">            tmp[i++] = li;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="程序流程"><a href="#程序流程" class="headerlink" title="程序流程"></a>程序流程</h3><p>代码的13到26行是检查输入参数是否有问题（数组不得为null，数组中不得含有null元素，不得含有重复元素）并按照从高到低排好序。28到45行是遍历各点的所有可能的组合（不是排列），并且用<code>isCollinearPoints（）</code>函数检查每一组点是否共线，如果共线，则用这一组点的 points[first] 和 points[fourth] ，new 一个 <code>LineSegment</code>,push到栈 lines 里，再将numberIndex ++。<br>也就是说，对象在构造的时候，程序就已经找到所有的共线点了，当用户调用<code>segments()</code>的时候，程序再用迭代器（而不是用<code>pop()</code>）将栈里的元素送进一个新的LineSegment数组中，并且返回这个数组。</p>
+<h3 id="debug之路"><a href="#debug之路" class="headerlink" title="debug之路"></a>debug之路</h3><p> BruteCollinearPoints 和 FastCollinearPoints 犯了很多一样的错误，我都在这里说了，FastCollinearPoints 那里就不再说了。</p>
+<h4 id="递归还是循环"><a href="#递归还是循环" class="headerlink" title="递归还是循环"></a>递归还是循环</h4><p>开始的时候我想用递归的方式遍历所有组合，顺便再强化一下使用递归的能力，写了好久终于把代码调试出来了，结果coursera检查我作业的时候用了好多Point，然后我的代码就StackOverflow了。。，于是我只能含泪把递归删了改用循环。（47行还有我用递归的痕迹）可能是我还不太会用递归，也可能这里本来就不适合递归，反正我想了好久都写不出来。。（好气）</p>
+<h4 id="不改实参"><a href="#不改实参" class="headerlink" title="不改实参"></a>不改实参</h4><p>这是代码规范相关的错误，就是只能读实参，不能改实参。因为如果我们把实参改了，客户代码如果没有按照规范来写的话，说不定客户代码之后还要用到它，但是他们不知道我们其实是已经把实参内容改过了的，这样子就会出差错。之前有想过这个问题，但是没有人和我说过这个需要注意，我以为就不用在意这个，然后我提交上去之后作业检查器就给我了这个</p>
+<blockquote>
+<p>Test 11: check that data type does not mutate the constructor argument</p>
+<ul>
+<li>input8.txt<ul>
+<li>data type mutated the points[] array</li>
+<li>data type should have no side effects unless documented in API</li>
+</ul>
+</li>
+<li>equidistant.txt<ul>
+<li>data type mutated the points[] array</li>
+<li>data type should have no side effects unless documented in API<br>==&gt; FAILED</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>偷懒被发现，只能老老实实再新建一个Point[ ] ，把实参复制进去。</p>
+<h4 id="返回值不可变"><a href="#返回值不可变" class="headerlink" title="返回值不可变"></a>返回值不可变</h4><p>这个也是代码规范相关的问题，而且和上面那个是相爱相杀的关系，它们两个只要有一个遵守规范就不会出错，上面的是不能修改实参，而这个是直接把传递出去的值设置为不可变的，这里的不可变不是真的不可变，而是调用端相对于被调用端不可变。很不幸，在我最初的代码版本里，这两个规范我都没有遵守，这意味着我永远不能调用自己写的代码。。。幸运的是，我是个知错就改的好孩子，以后应该不会出现这种问题了。。。解决办法和上面也是对称的，创建一个副本，把原始数据拷进去，然后再输出。</p>
+<p>事实上，在做完这个之后，我同时解决了另一个问题。<br>开始，我并没有用副本，<code>segments()</code>方法直接返回原数组，但是这就出现了一个问题，就是我不知道以后可能会有多少个共四点线段，又懒得写可调节数组的代码。于是我就在程序开始时计算参数中的点可能有多少中组合，按照最大值这样创建数组。这样做完后，又出现了两个问题</p>
+<ol>
+<li>我们知道，从n个元素中任取m个元素组合，有C=n!/(m!<em>(n-m)!)种组合方式，这里m=4，代入C=n!/(4</em>3<em>2</em>(n-4)!)，约等于n<sup>4</sup>，这是个什么概念，我从测试文件夹中找到的一个文件里面有1260个点，1260<sup>4</sup>=2520473760000，而int类型的最大值才为2^31-1 = 2147483647，创建这么大的数组根本不可能。</li>
+<li>假设我又添加了可调节数组的代码，可是按照一般情况，数组是不会被填满的，可是作业检查器会用for each语法糖来遍历我的数组，这样就会出现NonPointException</li>
+</ol>
+<p>被迫使用副本。意外的是，当我开始用副本后，感觉一切都明朗起来，尤其是第一个问题，用数组很棘手，既然最后省不掉副本，那么在收集共点线的时候就可以用其它的数据结构，比如栈！这样就可以不用关心长度了，push进栈的时候把numberIndex ++，最后创建副本的时候这样<code>LineSegment[] tmp = new LineSegment[numberIndex];</code> perfect！</p>
+<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><p>暴力解法最大的问题就是要遍历每四个点的所有组合，前面已经说过了当输入点的个数为n的时候，共有n<sup>4</sup>种组合，所以这个解法的性能就是O（n<sup>4</sup>)，刚刚已经计算过四次方级别是多么恐怖。空间性能占用的不大，甚至没有达到正比于n，但是这么恐怖的时间复杂度，空间就算一点不占也么的用。</p>
+<h2 id="FastCoolinearPoints"><a href="#FastCoolinearPoints" class="headerlink" title="FastCoolinearPoints"></a>FastCoolinearPoints</h2><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.In;</span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.Insertion;</span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.Quick3way;</span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.Stack;</span><br><span class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.StdDraw;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FastCollinearPoints</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Stack&lt;LineSegment&gt; lines;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numberIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FastCollinearPoints</span><span class="params">(Point[] ppp)</span> </span>&#123; <span class="comment">// finds all line segments containing 4 or more points</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ppp == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">        Point[] points = <span class="keyword">new</span> Point[ppp.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ppp.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (ppp[i] == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">            points[i] = ppp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        Quick3way.sort(points);        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; points.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (points[i].compareTo(points[i + <span class="number">1</span>]) == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">//18-33行是检查输入格式是否有误</span></span><br><span class="line">        </span><br><span class="line">        lines = <span class="keyword">new</span> Stack&lt;LineSegment&gt;();</span><br><span class="line">        Point[] duplicate = <span class="keyword">new</span> Point[points.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; points.length; i++) &#123;</span><br><span class="line">            duplicate[i] = points[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; points.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">            Comparator&lt;Point&gt; orignalPoint = points[i].slopeOrder();</span><br><span class="line">            Arrays.sort(duplicate, orignalPoint);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; points.length - <span class="number">1</span>;) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> k = j + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (k &lt; points.length &amp;&amp; orignalPoint.compare(duplicate[j], duplicate[k]) == <span class="number">0</span>)</span><br><span class="line">                    k++;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (k - j &gt; <span class="number">2</span>) &#123;</span><br><span class="line"></span><br><span class="line">                    Insertion.sort(duplicate, j, k); <span class="comment">// sort duplicate[j] -- duplicate[k-1]</span></span><br><span class="line">                    Point min = duplicate[j];</span><br><span class="line">                    Point max = duplicate[k - <span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span> (points[i].compareTo(min) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                        lines.push(<span class="keyword">new</span> LineSegment(points[i], max));</span><br><span class="line">                        numberIndex++;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                j = k;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numberOfSegments</span><span class="params">()</span> </span>&#123; <span class="comment">// the number of line segments</span></span><br><span class="line">        <span class="keyword">return</span> numberIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> LineSegment[] segments() &#123; <span class="comment">// the line segments</span></span><br><span class="line"></span><br><span class="line">        LineSegment[] tmp = <span class="keyword">new</span> LineSegment[numberIndex];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (LineSegment li : lines) &#123;</span><br><span class="line">            tmp[i++] = li;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="程序流程-1"><a href="#程序流程-1" class="headerlink" title="程序流程"></a>程序流程</h3><p>突然发现我在题目要求里把现在该说的说的差不多了，再解释一遍代码有点累赘，还是结合着注释看吧，代码估计比自然语言还要好懂”(￣y▽,￣)╭ “</p>
+<h3 id="debug之路-1"><a href="#debug之路-1" class="headerlink" title="debug之路"></a>debug之路</h3><p>有关不改实参和返回值不可变的问题和BruteCollinearPoints一样，就不再说了</p>
+<h4 id="关于重复线段和子线段的问题"><a href="#关于重复线段和子线段的问题" class="headerlink" title="关于重复线段和子线段的问题"></a>关于重复线段和子线段的问题</h4><p>这个问题在暴力解决方案里不存在，因为暴力解决虽然遍历了一遍所有组合，但是它只遍历了<strong>一遍</strong>，所以不会出现重复线段的问题，而且暴力解决默认之解决只含有4个元素的问题，所以不会出现子线段问题。而快速解决方案的API里吹下了牛逼，说能解决4个以上共线点的问题，而且还不出现重复线段和子线段，这就很头疼了。开始我没有考虑这个问题，而是想着先把线段找出来，然后再判断lines里是否已包含了这个线段，如果没有再添加进去。而这个判断lines里是否已经包含这个线段不是说起来那么容易，因为<code>LineSegment</code>这个类里没有<code>equals()</code>或者<code>compareTo()</code>这两个方法，甚至<code>hashCode()</code>方法也被重写成了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public int hashCode() &#123;</span><br><span class="line">       throw new UnsupportedOperationException();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>所有比较两个线段是否相等的路都被封死了。但是机智如我，最后竟然发现<code>LineSegment</code>竟然重写了<code>toString()</code>，我只要比较两个线段的字符串形式不就行了吗，说干就干，最后代码也成功运行了，但是我用的时候忽略了<code>toString()</code>上面的注释</p>
+<blockquote>
+<p>Returns a string representation of this line segment<br>     This method is provide for debugging;<br>      your program should not rely on the format of the string representation.</p>
+</blockquote>
+<p>果然，在信心满满地提交完作业之后，分数依旧不理想，作业检查器说我的代码</p>
+<blockquote>
+<p>fragile dependence on return value of toString()</p>
+</blockquote>
+<p>一个月过去了，作业检查器一点没变，还是那么严格。。。然后我想能不能不用LineSegment里的代码检查重复，而是在每次保存的到lines 里的时候再保存一份其他的能表示唯一线段的数据到另一个地方，然后每次检查重复就用另一个地方的什么方法检查。但是感觉这种办法绕了好远，自己又想不出更好的解决办法，于是跑到讨论里搜索了一波。<br><img src="https://wx3.sinaimg.cn/mw690/005PyLUngy1frzfx9u6qmj30uz06qgm7.jpg" alt="discussion1"><br>甚至不用关键字搜索，仅仅点击用最热门方式排序，第一个就是我碰到的问题，看来我是正常人（￣︶￣）↗　，点进去看看：<br><img src="https://wx4.sinaimg.cn/mw690/005PyLUngy1frzfzywjsoj30s808hmy8.jpg" alt="discussion2"><br>这位兄dei的想法和我一样，可是我感觉这种方法实在太绕了，于是继续搜索<br><img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1frzimts80gj30uc0ii775.jpg" alt="discussion3"><br>这个答案有三个赞！感觉有戏，于是耐着性子把这么长一段英文看完，终于找到了满意的解法！首先，按照和p[i]的斜率将所有点排序，然后寻找三个以上相邻的，有相同斜率的点，并且将它们用<code>compareTo()</code>（从高到低，从右到左）方法排序，然后用最小的那个和p[i]用<code>compareTo()</code>比较，如果p[i]比那个最小的还要小（意味着它是最低的或者最左边的），那么就用最大的那个点和p[i]组成一个线段 push 进去，这样就可以避免重复元素了！这样既节省代码又节省时间，出题者把其他的路封得那么死，就是为了引导我们用这样的方法吧。</p>
+<h3 id="性能分析-1"><a href="#性能分析-1" class="headerlink" title="性能分析"></a>性能分析</h3><p>44行到62行是一个执行n次的外循环，里面又很多内循环，我们只用找出其中循环最多的那个内循环就行，其他的项忽略，经过分析，只有调用排序那一行代码的循环次数最多，也就是快速排序的效率n<em>log n，那么叠加起来就是n<sup>2</sup></em>log n了，符合要求。空间上面使用了一个辅助数组，也就是与n成正比了，也符合要求，任务完成！</p>
+<h1 id="分析总结"><a href="#分析总结" class="headerlink" title="分析总结"></a>分析总结</h1><p>用couresa的好处就在于有人（机器）会一丝不苟地检查我的作业，而且可以完整地完成一个项目，这样估计对实战水平有帮助，但是感觉这个太侧重于实战了，在写代码时，在排序上思考的时间并不多。。。</p>
+<p>这一章的内容是排序，于是我在做这个作业的时候一边写，一边分析排序在这个看上去和排序没啥关系的题目里起了什么作用。事实上，快速解法的核心就是排序，虽然冗长的代码里它只占了43一行，但是没它就实现不了这个优雅的解法。细心的你一定看到了在代码的52行，我将子数组排序的时候用的是插入排序，这是因为在问题规模比较小的时候，插入排序的效率实际上是好于快速排序的。很开心，在排序的时候，我很自然的就想到了应该挑一下排序方式，可能这就是我学排序的意义之一吧。（强行升华）<br>拜拜。</p>
+<p><span style="color:brown;font-size:small">声明：以上内容均来自于GitHub用户<code>LittleWhite-Hai</code>(李**)，转载免费，但是请告诉我一下</span></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法-java-排序-图/" rel="tag"># -算法 -java -排序 -图</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/08/快速排序-Quicksort/" rel="next" title="快速排序(Quicksort)">
+                <i class="fa fa-chevron-left"></i> 快速排序(Quicksort)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="李海龙" />
+            
+              <p class="site-author-name" itemprop="name">李海龙</p>
+              <p class="site-description motion-element" itemprop="description">我的技术（xue xi）博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Little-White-Hai" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:super@lihailong666.top" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目要求"><span class="nav-number">1.</span> <span class="nav-text">题目要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作业内容"><span class="nav-number">2.</span> <span class="nav-text">作业内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Point"><span class="nav-number">2.1.</span> <span class="nav-text">Point</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BruteCollinearPoints"><span class="nav-number">2.2.</span> <span class="nav-text">BruteCollinearPoints</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序流程"><span class="nav-number">2.2.2.</span> <span class="nav-text">程序流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debug之路"><span class="nav-number">2.2.3.</span> <span class="nav-text">debug之路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#递归还是循环"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">递归还是循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不改实参"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">不改实参</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回值不可变"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">返回值不可变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性能分析"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FastCoolinearPoints"><span class="nav-number">2.3.</span> <span class="nav-text">FastCoolinearPoints</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序流程-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">程序流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debug之路-1"><span class="nav-number">2.3.3.</span> <span class="nav-text">debug之路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于重复线段和子线段的问题"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">关于重复线段和子线段的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能分析-1"><span class="nav-number">2.3.4.</span> <span class="nav-text">性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析总结"><span class="nav-number">3.</span> <span class="nav-text">分析总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李海龙</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
