@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUngy1fs19o5m8d9j30an0dwaas.jpg">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fs19rjtiz4j31340m0k17.jpg">
 <meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUngy1fs1a3xwgetj30fn06hdfv.jpg">
-<meta property="og:updated_time" content="2018-06-06T03:13:29.735Z">
+<meta property="og:updated_time" content="2018-06-06T12:47:08.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于“类”的访问权限">
 <meta name="twitter:description" content="刚刚写作业时，碰到了一个小问题，结局深深震惊了我，感觉有必要写篇博客记录一下。">
@@ -231,7 +231,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">4</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">5</span></a>
   </li>
         
         
@@ -247,7 +247,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">8</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">9</span></a>
   </li>
         
         
@@ -397,7 +397,7 @@
       
 
       
-        <p>刚刚写作业时，碰到了一个小问题，结局深深震惊了我，感觉有必要写篇博客记录一下。<a id="more"></a><br>事情是这样的，我在构建一个名字叫Board的类的时候，API要求这样一个方法<code>public boolean equals(Board y)</code>，就是客户代码调用这个函数判断隐私参数对象(this)是否等于显示参数对象(y)，要求比较这个对象的内部数据实现（也就是一个私有域）。通常我都是为每一个对象分配一个唯一ID，再通过get()方法获取它，客户代码通过比较这个ID来判断两个对象是否相等。但是这次的作业要求直接写一个equals()方法来判断相等，这就很头疼了，<em>我开始找这个类有没有public的域或者某个方法返回对象唯一的身份</em>，通过它们来判断相等。果然被我找到了一个toString()方法，正在我准备写出<br><code>return this.toString.equals(y.toString);</code>这样的代码的时候,我又想起了上篇博客，作业检查器提醒过我不要依赖字符串输出版式，因为这样效率很低而且代码不健壮。<br>然后我又想了好久没有答案，于是跑到讨论里搜索一波<br><img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fs19g8w34mj30pf0ho408.jpg" alt="discussion1"><br>？？？<br>一个类的就能互相看？这么奔放的吗？？？我用了这么久的java，一个对象没有权限进入另一个对象的私有域的观念已经深深烙在我的心中，你现在和我说只要是一个类的就能随便看，我会信你？于是我打开了我的小黄书 <img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fs19o5m8d9j30an0dwaas.jpg" alt="yellowbook"><br>翻到第114页 <img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fs19rjtiz4j31340m0k17.jpg" alt="page 114"></p>
+        <p>刚刚写作业时，碰到了一个小问题，结局深深震惊了我，感觉有必要写篇博客记录一下。<a id="more"></a><br>事情是这样的，我在构建一个名字叫Board的类的时候，API要求这样一个方法<code>public boolean equals(Board y)</code>，就是客户代码调用这个函数判断隐式参数对象(this)是否等于显式参数对象(y)，要求比较这个对象的内部数据实现（也就是一个私有域）。通常我都是为每一个对象分配一个唯一ID，再通过get()方法获取它，客户代码通过比较这个ID来判断两个对象是否相等。但是这次的作业要求直接写一个equals()方法来判断相等，这就很头疼了，<em>我开始找这个类有没有public的域或者某个方法返回对象唯一的身份</em>，通过它们来判断相等。果然被我找到了一个toString()方法，正在我准备写出<br><code>return this.toString.equals(y.toString);</code>这样的代码的时候,我又想起了上篇博客，作业检查器提醒过我不要依赖字符串输出版式，因为这样效率很低而且代码不健壮。<br>然后我又想了好久没有答案，于是跑到讨论里搜索一波<br><img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fs19g8w34mj30pf0ho408.jpg" alt="discussion1"><br>？？？<br>一个类的就能互相看？这么奔放的吗？？？我用了这么久的java，一个对象没有权限进入另一个对象的私有域的观念已经深深烙在我的心中，你现在和我说只要是一个类的就能随便看，我会信你？于是我打开了我的小黄书 <img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fs19o5m8d9j30an0dwaas.jpg" alt="yellowbook"><br>翻到第114页 <img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fs19rjtiz4j31340m0k17.jpg" alt="page 114"></p>
 <p>我靠，不仅java 这样，c++也这样，之前学的时候居然没注意这块，失算失算。</p>
 <p>既然能访问，是不是意味着能修改，我做了个实验<img src="https://wx3.sinaimg.cn/mw690/005PyLUngy1fs1a3xwgetj30fn06hdfv.jpg" alt="test"><br>正常修改this.i=2是意料之中，但是能修改q.i=2是我以前以为不行的，eclipse没报错，说明我之前错了。<br>我不知道这样设计的目的是什么，只能顺着规则改变一下自己的观念：就是每一个类的设计者都要为这个类的所有对象负责，而不单单是this对象，在涉及到this之外的同类其它对象时，因为有权限修改其它对象的域，就要保证在修改的时候小心翼翼，避免以后出乱子。</p>
 
@@ -442,6 +442,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/06/优先队列/" rel="prev" title="优先队列(Priority queue)">
+                优先队列(Priority queue) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -510,7 +514,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -541,7 +545,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  <a href="/tags/随笔.html">
                     
                     
                       
@@ -552,7 +556,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
