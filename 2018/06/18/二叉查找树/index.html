@@ -101,27 +101,32 @@
 
 
 
-  <meta name="description" content="第三周主页 已经学到第三周了，感觉这个课程其实非常不错的，虽然听力不太好要借助字幕，但是课程讲的很不错，重要的是后面的编程作业是神器一样的东西，老师们非常认真，挑出了我的很多小毛病（厉害在是检查出问题的是他们事先部署好的程序），而且还有配套的书可以看。">
+  <meta name="description" content="这次要讲的是一个实现和理解略复杂，但能在一般情况下把二分查找表的所有功能用对数时间完成的数据结构，二叉查找树。">
+<meta name="keywords" content="数据结构,算法,查找,树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="暂时搁置coursera上的课程吧">
-<meta property="og:url" content="http://yoursite.com/2018/04/28/暂时搁置coursera上的课程吧/index.html">
+<meta property="og:title" content="二叉查找树">
+<meta property="og:url" content="http://yoursite.com/2018/06/18/二叉查找树/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="第三周主页 已经学到第三周了，感觉这个课程其实非常不错的，虽然听力不太好要借助字幕，但是课程讲的很不错，重要的是后面的编程作业是神器一样的东西，老师们非常认真，挑出了我的很多小毛病（厉害在是检查出问题的是他们事先部署好的程序），而且还有配套的书可以看。">
+<meta property="og:description" content="这次要讲的是一个实现和理解略复杂，但能在一般情况下把二分查找表的所有功能用对数时间完成的数据结构，二叉查找树。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUnly1fqoq94hzbcj31ey0n5djd.jpg">
-<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fqoqtdpwzjj31fs0ngafj.jpg">
-<meta property="og:updated_time" content="2018-05-26T08:41:29.233Z">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/32bst/images/binary-tree-anatomy.png">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/32bst/images/bst-anatomy.png">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/32bst/images/bst-delete.png">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/32bst/images/bst-best.png">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/32bst/images/bst-worst.png">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/32bst/images/bst-typical.png">
+<meta property="og:updated_time" content="2018-06-18T02:54:31.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="暂时搁置coursera上的课程吧">
-<meta name="twitter:description" content="第三周主页 已经学到第三周了，感觉这个课程其实非常不错的，虽然听力不太好要借助字幕，但是课程讲的很不错，重要的是后面的编程作业是神器一样的东西，老师们非常认真，挑出了我的很多小毛病（厉害在是检查出问题的是他们事先部署好的程序），而且还有配套的书可以看。">
-<meta name="twitter:image" content="https://wx1.sinaimg.cn/mw690/005PyLUnly1fqoq94hzbcj31ey0n5djd.jpg">
+<meta name="twitter:title" content="二叉查找树">
+<meta name="twitter:description" content="这次要讲的是一个实现和理解略复杂，但能在一般情况下把二分查找表的所有功能用对数时间完成的数据结构，二叉查找树。">
+<meta name="twitter:image" content="https://algs4.cs.princeton.edu/32bst/images/binary-tree-anatomy.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/28/暂时搁置coursera上的课程吧/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/18/二叉查找树/"/>
 
 
 
@@ -131,7 +136,7 @@
   };
 </script>
 
-  <title>暂时搁置coursera上的课程吧 | 博主：Little-White</title>
+  <title>二叉查找树 | 博主：Little-White</title>
   
 
 
@@ -303,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/28/暂时搁置coursera上的课程吧/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/二叉查找树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Little-White">
@@ -320,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">暂时搁置coursera上的课程吧
+          <h1 class="post-title" itemprop="name headline">二叉查找树
               
             
           </h1>
@@ -339,7 +344,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T10:11:12+08:00">2018-04-28</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T08:33:34+08:00">2018-06-18</time>
             
 
             
@@ -360,7 +365,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/章节总结/" itemprop="url" rel="index"><span itemprop="name">章节总结</span></a></span>
 
                 
                 
@@ -394,10 +399,18 @@
       
 
       
-        <p><img src="https://wx1.sinaimg.cn/mw690/005PyLUnly1fqoq94hzbcj31ey0n5djd.jpg" alt="1"> <small>第三周主页</small><br> 已经学到第三周了，感觉这个课程其实非常不错的，虽然听力不太好要借助字幕，但是课程讲的很不错，重要的是后面的编程作业是神器一样的东西，老师们非常认真，挑出了我的很多小毛病（厉害在是检查出问题的是他们事先部署好的程序），而且还有配套的书可以看。<a id="more"></a>前几天中文字幕突然没有了，视频也就没法看了，本来打算在书上学课程，然后在coursera上面做编程作业的。但是这两天做的我实在受不了了，感觉出这个课程的老师们对自己严格的同时对作业也非常严格，要的代码感觉都是工业水准的，有时候为了完成其中一个细节要求要花一个多小时，<br><img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fqoqtdpwzjj31fs0ngafj.jpg" alt="2"> <small>一大篇specification随便截取一段就有这么多麻烦要求</small></p>
-<p>经常是做完一个小模块就没有了精力，剩下内容的只能休息好久才能 继续做，这个样子的话思维就不连续了。问题就出在我的实力和作业难度差距太大，学 习就容易陷入被动，做完作业会不想总结，只能硬逼着自己，但是这样效果是肯定不好的。</p>
-<hr>
-<p>  挣扎了很久，决定还是先看书，这个作业等到我有一定基础了再来做，毕竟感觉这些作业很宝贵不愿意浪费（但愿日后会履行诺言吧，哈哈）</p>
+        <p>这次要讲的是一个实现和理解略复杂，但能在一般情况下把二分查找表的所有功能用对数时间完成的数据结构，二叉查找树。<a id="more"></a></p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>一颗二叉树是由很多结点组成，一般的结点有左右两个链接，两个链接分别可以连上左右两个子结点，左子结点小于父结点（根据键来比），右子结点大于父结点，位于二叉树最上方的叫做根结点，最下方没有子结点的叫做叶子结点。<br><img src="https://algs4.cs.princeton.edu/32bst/images/binary-tree-anatomy.png" alt="二叉树"> <img src="https://algs4.cs.princeton.edu/32bst/images/bst-anatomy.png" alt="二叉查找树"></p>
+<p>二叉树在代码那里里看很像链表，不过它的Node除了键，值外，还有两个链接和一个int 值N来保存子树中键的数量。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="put"><a href="#put" class="headerlink" title="put"></a>put</h2><p>put操作从根开始，递归地用传递进来的参数key和每一个结点的key作比较，如果参数小于结点，那么就和当前结点的左子结点比较，如果大于，那么就和右结点比较，如果相等，那么就更新当前结点的值。然后依照来时的路返回到根结点，并在这个过程中把各个结点的N加1。</p>
+<h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2><p>查找操作和put操作在“如果相等”之前做的是一样的，如果相等的话，get会返回当前结点的值。</p>
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>删除操作在二分查找树这里是挺麻烦的，尤其是非叶子结点，删除了之后要找个替代品。这个替代品要保证和待删除结点与父结点和子结点有同样的大小关系。怎么找和找谁是个挺麻烦的事，一种办法是找它的后继结点，找到待删除结点它右子树中最小的那一个键来替换它，后继结点能保证既是待删除结点左子树中最大的，又是右子树中最小的。如果待删除结点没有右结点更好办，直接把左子树的根结点接上去，那如果左子树也没有呢，那就不谈了 :) 。下图是在一棵树上删除E的流程。<br><img src="https://algs4.cs.princeton.edu/32bst/images/bst-delete.png" alt="后继结点"><br>不仅仅有后继结点一个选择，前趋结点也可以当作替换的结点，为了树的平衡，应该随机用这两个替代结点。<br>在删除完成后还应该顺着查找它来时的路返回，并把路上每个结点的N减1.</p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor"></a>floor</h2><p>floor就是在树中找小于等于参数key的最大的元素，如果key小于当前结点，那么那么floor值一定在当前结点的左子树中，如果key大于当前结点，那么除非右子树中有小于等于参数key的值，否则当前结点就是小于等于key的最大元素。ceiling方法正好相反。</p>
+<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><p>选择函数接受一个int类型的排名n，然后返回这个名次的结点（小于此结点的元素有n个）。每一个结点保存的N就是select函数的关键，如果当前结点左子树的N大于参数n，那么就在左子树中继续查找，如果当前结点左子树的N小于参数n，那么就在右子树中找第（n-1-左子树的N）的结点，否则，当前节点就是待查找结点。递归上面的操作，就能找到了。</p>
+<h2 id="rank"><a href="#rank" class="headerlink" title="rank"></a>rank</h2><p>rank方法和get方法差不多，要先定义一个变量t，每次往右子树去的时候t+1，最后找到key的时候把当前结点的N+t就是排名了。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>上面的每一个方法都是在树中纵向移动，所以最长的步数就是树高了，树的高度取决于各个键的输入顺序。最好的情况是这样的<br><img src="https://algs4.cs.princeton.edu/32bst/images/bst-best.png" alt="opt"> 这种完美的树，对于n个结点，高度为lg n<br>最差的是这样的<br><img src="https://algs4.cs.princeton.edu/32bst/images/bst-worst.png" alt="worst"> 一字长蛇阵，对于n个结点，高度为n</p>
+<p>当然，这两种情况在实际中不会经常出现，一般来说，没那么好运也没那么差劲，所以一般的是这样的<br><img src="https://algs4.cs.princeton.edu/32bst/images/bst-typical.png" alt="typical"><br>决定树好坏的不仅仅是插入顺序，还有删除，如果每次删除都用的是后继节点，那么最终树就会向左歪。<br>在输入随机并且n足够大的情况下，树的高度大概是2.99*lg n（书上说的），这基本满足了对数级别的要求，但是对于顺序输入，树的高度就又变成n了。快速排序也有类似的问题，但快速排序我们可以提前将待排序数组打乱，对于符号表，用例控制着元素的先后顺序，如果用例输入的时候用的是升序或者降序，那么我们一点办法都没有。</p>
+<p>二叉查找树在一般情况下性能不错，可是最坏情况下还是很糟糕，好在我们还有更好的数据结构：平衡二叉树（红黑树）</p>
 
       
     </div>
@@ -416,6 +429,18 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/查找/" rel="tag"># 查找</a>
+          
+            <a href="/tags/树/" rel="tag"># 树</a>
+          
+        </div>
+      
 
       
       
@@ -425,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/12/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/06/17/符号表/" rel="next" title="基础符号表">
+                <i class="fa fa-chevron-left"></i> 基础符号表
               </a>
             
           </div>
@@ -434,10 +459,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/05/基本排序/" rel="prev" title="基本排序">
-                基本排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,8 +507,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -600,6 +630,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#put"><span class="nav-number">2.1.</span> <span class="nav-text">put</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-number">2.2.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete"><span class="nav-number">2.3.</span> <span class="nav-text">delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#floor"><span class="nav-number">2.4.</span> <span class="nav-text">floor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select"><span class="nav-number">2.5.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rank"><span class="nav-number">2.6.</span> <span class="nav-text">rank</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
