@@ -101,17 +101,34 @@
 
 
 
-  <meta name="description" content="我的技术（xue xi）博客">
+  <meta name="description" content="这次主要讲的是红黑树（RBT），红黑树还有个怪怪的名字叫做对称二叉B树，这个B是balance的B，不是心里没B数的B。在最坏情况下它的所有操作都是对数级别的，内存占用几乎和二叉查找树没差别，代码量也不多，唯一的缺点就是太太太太太太难理解了╯︿╰ ，所以这篇博客可能会有点长。">
+<meta name="keywords" content="数据结构,算法,查找,树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平衡查找树">
 <meta property="og:url" content="http://yoursite.com/2018/06/18/平衡查找树/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="我的技术（xue xi）博客">
+<meta property="og:description" content="这次主要讲的是红黑树（RBT），红黑树还有个怪怪的名字叫做对称二叉B树，这个B是balance的B，不是心里没B数的B。在最坏情况下它的所有操作都是对数级别的，内存占用几乎和二叉查找树没差别，代码量也不多，唯一的缺点就是太太太太太太难理解了╯︿╰ ，所以这篇博客可能会有点长。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-18T07:27:00.939Z">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsffyrj17nj31kw16okjo.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fsffyh0mszj31kw0r1qv6.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsffy0t73qj31kw0hpnpd.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fsffy202ahj31kw11hkjl.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsffxymaonj31kw0ynb29.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsg82rrz6rj307u0jpjsn.jpg">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/33balanced/images/redblack-1-1.png">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsg9nl9ty4j31kw0pa4qp.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsg9nv96wtj31kw0ksu0z.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsga6kuhrgj31kw11nu0x.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsgazhrk9zj31kw0uthdu.jpg">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/33balanced/images/redblack-construction.png">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsgpammquoj31kw0q8hdz.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsgpzwqzz1j30da0il0z6.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsgt4l6xwhj30y90cqwlf.jpg">
+<meta property="og:updated_time" content="2018-06-20T00:17:07.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平衡查找树">
-<meta name="twitter:description" content="我的技术（xue xi）博客">
+<meta name="twitter:description" content="这次主要讲的是红黑树（RBT），红黑树还有个怪怪的名字叫做对称二叉B树，这个B是balance的B，不是心里没B数的B。在最坏情况下它的所有操作都是对数级别的，内存占用几乎和二叉查找树没差别，代码量也不多，唯一的缺点就是太太太太太太难理解了╯︿╰ ，所以这篇博客可能会有点长。">
+<meta name="twitter:image" content="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsffyrj17nj31kw16okjo.jpg">
 
 
 
@@ -241,7 +258,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">12</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">13</span></a>
   </li>
         
         
@@ -346,6 +363,24 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/章节总结/" itemprop="url" rel="index"><span itemprop="name">章节总结</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -373,7 +408,42 @@
       
 
       
-        
+        <p>这次主要讲的是红黑树（RBT），红黑树还有个怪怪的名字叫做对称二叉B树，这个B是balance的B，不是心里没B数的B。在最坏情况下它的所有操作都是对数级别的，内存占用几乎和二叉查找树没差别，代码量也不多，唯一的缺点就是太太太太太太难理解了╯︿╰ ，所以这篇博客可能会有点长。<a id="more"></a></p>
+<h1 id="2-3-B树"><a href="#2-3-B树" class="headerlink" title="2-3 B树"></a>2-3 B树</h1><p>作为理解的过渡，先了解一下2-3树，2-3树和二叉查找树很像，不过它有2-结点和3-结点两种结点，就像它的的名字一样。2-结点就是普通结点，3-结点可以存放两个键和三个链接，下图就是一个2-3树<br><img src="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsffyrj17nj31kw16okjo.jpg" alt="2-3树">（这个图和下面一个图中左偏的情况不会出现，画的时候没注意）</p>
+<h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><p>首先说明，2-3树插入还是先从树的最下面插入，而不是看到上面的2-结点有空位把它变成3-结点。虽然是从最下面插入，但一般情况下却不会使树增高。<br>原因很简单，如果插入结束于一个2-结点，那么直接把这个2-结点变成3-结点就行了。<br><img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fsffyh0mszj31kw0r1qv6.jpg" alt="2-结点插入"><br>如果查找结束于3-结点，情况就有点麻烦了，我们从待插入键和3-结点中的两个键中选出一个中键，然后把它送入父节点。如图所示<br><img src="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsffy0t73qj31kw0hpnpd.jpg" alt="3-结点插入1"><br>那如果它的父节点也是一个3-结点呢？那就继续分解父节点的中键传递上去。如图：<img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fsffy202ahj31kw11hkjl.jpg" alt="3-结点插入2"><br>如果一直传到根节点，恰好根节点也是3-结点呢？根节点的多余结点没有人倾泻，所以只能自爆，这时候树高就会+1。如图<br><img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsffxymaonj31kw0ynb29.jpg" alt="3-结点插入3"></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>可以看到，树的高度会在log<sub>3</sub>N和lgN之间，而插入和查找操作在树中移动的次数都不会超过树高，尽管查看3-结点会查看两个值，2*log<sub>3</sub>N也不会比lgN大多少。<br>2-3树是如何做到这一点的，我想了好几次都没有完全想明白过，只能大概说出它做了什么。<br>导致普通二叉树低效的原因就是树的偏侧，可能向左偏也可能向右偏，普通二叉树对这个一点办法都没有。<br>而2-3树可以保证一个结点最小子树不会小于它最大子树的1/2，请带着这个条件看看下面的每一对子树，输入已经尽力把树往右掰了。<img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsg82rrz6rj307u0jpjsn.jpg" alt="升序插入"><br>2-3树还有一点很重要的就是每次传上去的键都是中键，这样做一方面是方便安排剩下的两个键，更重要的是，随着不断地插入和调整，越靠近所有键中位数的键会越往上走，请仔细想想是根节点是中位数，树容易平衡，还是最大键或最小键树容易平衡。</p>
+<p>我只说了插入操作而没有说其它的，因为2-3树只是一个引子，实现起来要同时维护两种结点，很麻烦，所以书上干脆没有实现。而是换了一个听起来不像是实现2-3树的方法来实现2-3树：红黑树。</p>
+<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>红黑树只有2-结点，但是每个结点里都会保存一个额外的变量，就是它的颜色，颜色只有红黑两种，<strong>颜色代表了这个结点与父节点链接的颜色。</strong>红黑树有如下性质：</p>
+<ul>
+<li>红链接都是左连接</li>
+<li>一个结点最多被一条红链接相连</li>
+<li>根节点到任意空链接的黑色链接都相等</li>
+</ul>
+<p>红黑树的操作和2-3树都是一一对应关系，请带着这个观念认识红黑树。</p>
+<ul>
+<li>被两个黑链接相连的结点对应2-3树的2-结点。</li>
+<li>被一个红链接相连的两个结点对应2-3树的3-结点，3-结点的两个键就是这两个结点的键，3-结点的三个链接从左到右分别对应着子节 点左链接，子节点右链接，父节点右链接。</li>
+</ul>
+<p><img src="https://algs4.cs.princeton.edu/33balanced/images/redblack-1-1.png" alt="2-3树对应红黑树"><br>下面解释一下红黑树的三个性质。</p>
+<ul>
+<li>一是约定俗成，统一标准，二是直观容易和2-3树对应，不信看上图。</li>
+<li>红链接是为了区分2-结点和3-结点的，如果一个结点同时被两个红链接相连，那么这代表了一个4-结点（因为它有3个键），然而2-3树没有4-结点。</li>
+<li>2-3树任意空链接到根节点的距离都相等，红链接在2-3树中只是表示3-结点的工具，并不是链接，所以在红黑树中根节点到任意空链接的黑链接都相等。</li>
+</ul>
+<h2 id="红黑树的基本操作"><a href="#红黑树的基本操作" class="headerlink" title="红黑树的基本操作"></a>红黑树的基本操作</h2><p>在操作过程中，经常会破坏上面的性质，所以红黑树有一些基本操作来保证和2-3树的一致性。</p>
+<h3 id="左旋转："><a href="#左旋转：" class="headerlink" title="左旋转："></a>左旋转：<img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsg9nl9ty4j31kw0pa4qp.jpg" alt="左旋转"></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">rotateLeft</span><span class="params">(Node h)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// assert (h != null) &amp;&amp; isRed(h.right);</span></span><br><span class="line">        Node x = h.right;</span><br><span class="line">        h.right = x.left;</span><br><span class="line">        x.left = h;</span><br><span class="line">        x.color = x.left.color;</span><br><span class="line">        x.left.color = RED;</span><br><span class="line">        x.size = h.size;</span><br><span class="line">        h.size = size(h.left) + size(h.right) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="右旋转"><a href="#右旋转" class="headerlink" title="右旋转: "></a>右旋转: <img src="https://wx1.sinaimg.cn/mw690/005PyLUngy1fsg9nv96wtj31kw0ksu0z.jpg" alt="右旋转"></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">rotateRight</span><span class="params">(Node h)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// assert (h != null) &amp;&amp; isRed(h.left);</span></span><br><span class="line">       Node x = h.left;</span><br><span class="line">       h.left = x.right;</span><br><span class="line">       x.right = h;</span><br><span class="line">       x.color = x.right.color;</span><br><span class="line">       x.right.color = RED;</span><br><span class="line">       x.size = h.size;</span><br><span class="line">       h.size = size(h.left) + size(h.right) + <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">return</span> x;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，在旋转过程中，两个结点链接的颜色交换了，而不是其中一个变成了红色，换句话说，父节点连接上面链接的颜色不会变。<br>这两个操作都不会破坏树的有序性和平衡性，我们可以放心地使用它们，并通过使用它们来维护树的其它性质。</p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><h3 id="向一个2-结点插入新结点"><a href="#向一个2-结点插入新结点" class="headerlink" title="向一个2-结点插入新结点"></a>向一个2-结点插入新结点</h3><p>注意，不管是向哪种结点插入新结点，新结点链接的颜色总是红色，因为这样不会破坏红黑树的黑色平衡性（第三条性质）。<br><img src="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsga6kuhrgj31kw11nu0x.jpg" alt="红黑树2-结点插入"></p>
+<h3 id="向一个3-结点插入新结点"><a href="#向一个3-结点插入新结点" class="headerlink" title="向一个3-结点插入新结点"></a>向一个3-结点插入新结点</h3><p><img src="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsgazhrk9zj31kw0uthdu.jpg" alt="红黑树3-结点插入"><br>最后一步变换颜色我之前没说到，这是当碰到左右两个子节点都是红色链接的时候，就把这两个链接的颜色变成黑色，并把父节点到这个结点链接的颜色变成红色。这一步对应到2-3树中就是对一个4-结点的分解操作：它把4-结点的中键传递到父节点中，并把之前的3-结点拆分成两个2-结点。<br>从红黑树的角度来看，这个变换颜色的操作在没有破坏树的黑色平衡性前提下把两个红色连接变成了一个。</p>
+<h3 id="从下到上递归地调整树"><a href="#从下到上递归地调整树" class="headerlink" title="从下到上递归地调整树"></a>从下到上递归地调整树</h3><p>向上传递的红色链接可能会破坏上面原有的结构，需要再利用各种基本操作再将上面的结构恢复，直到根节点。很多操作到最后都会把根节点的颜色变成红色，这代表它是一个3-结点的一部分，但根节点永远不可能在一个红链接下面，所以要在最后将根节点的颜色变成黑色。当根节点由红变黑时，意味着树高+1。<br><img src="https://algs4.cs.princeton.edu/33balanced/images/redblack-construction.png" alt="红黑树的构造"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(Key key, Value val)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (key == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"first argument to put() is null"</span>);</span><br><span class="line">       <span class="keyword">if</span> (val == <span class="keyword">null</span>) &#123;</span><br><span class="line">           delete(key);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       root = put(root, key, val);</span><br><span class="line">       root.color = BLACK;</span><br><span class="line">       <span class="comment">// assert check();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// insert the key-value pair in the subtree rooted at h</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> Node <span class="title">put</span><span class="params">(Node h, Key key, Value val)</span> </span>&#123; </span><br><span class="line">       <span class="keyword">if</span> (h == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> Node(key, val, RED, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">int</span> cmp = key.compareTo(h.key);</span><br><span class="line">       <span class="keyword">if</span>      (cmp &lt; <span class="number">0</span>) h.left  = put(h.left,  key, val); </span><br><span class="line">       <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>) h.right = put(h.right, key, val); </span><br><span class="line">       <span class="keyword">else</span>              h.val   = val;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// fix-up any right-leaning links</span></span><br><span class="line">       <span class="keyword">if</span> (isRed(h.right) &amp;&amp; !isRed(h.left))      h = rotateLeft(h);</span><br><span class="line">       <span class="keyword">if</span> (isRed(h.left)  &amp;&amp;  isRed(h.left.left)) h = rotateRight(h);</span><br><span class="line">       <span class="keyword">if</span> (isRed(h.left)  &amp;&amp;  isRed(h.right))     flipColors(h);</span><br><span class="line">       h.size = size(h.left) + size(h.right) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> h;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>算法4说插入操作是那本书最复杂的操作之一，删除操作还要更复杂，更变态的是，那本书把它当作了练习题。。。我当然没有做，不过了解原理还是有必要的。</p>
+<h2 id="叶子结点"><a href="#叶子结点" class="headerlink" title="叶子结点"></a>叶子结点</h2><p>首先探讨一下能不能直接删除一个结点，或者说在什么情况下可以直接删除一个结点。<br><img src="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsgpammquoj31kw0q8hdz.jpg" alt="删除叶子结点"><br>对于叶子结点C，只有第一种3-结点的情况可以直接删除，其它的三个都会破坏树的第三个性质：黑色平衡性。那如何删除底部的2-结点呢，就是把它变成3-结点，我们从上向下查找的过程中，如果发现当前结点不是3-结点，就要根据情况把它变成 <strong>临时</strong> 3-结点或者4-结点<br><img src="https://wx4.sinaimg.cn/mw690/005PyLUngy1fsgpzwqzz1j30da0il0z6.jpg" alt="变化4-结点"><br>最后到树底直接删除3-结点中的待删除结点。删除完成后要回溯到根节点，一方面是重新计算各子树的大小，更重要的是把路上的临时4-结点重新分解为2-结点或3-结点。</p>
+<h2 id="树中间的结点"><a href="#树中间的结点" class="headerlink" title="树中间的结点"></a>树中间的结点</h2><p>如果待删除结点在树中间，也按照上面说的办法，这样待删除节点就不会是2-结点，这时候像二分查找树那样找到它的后继结点替换掉待删除结点，然后删除后继结点。后继结点是右子树中最小的一个，所以一定是叶子结点，再加上待删除节点一定不是2-结点，所以操作就很容易了。做完之后，像刚才一样回溯。</p>
+<h1 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h1><p>红黑树和普通二叉查找树的区别就在于多了一个颜色变量，并且插入和删除有很大的不同，其它方法都可以直接用普通二叉树的方法，因为红黑树本身也可以看作一个二叉查找树。<br><img src="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsgt4l6xwhj30y90cqwlf.jpg" alt="红黑树的性能"><br>想象一下，上亿的数据仅仅需要二三十次的操作就能完成查找删除插入操作，多么伟大的成就。<br>然而，还有更牛逼的数据结构，可以在常数时间内就完成操作：散列表。</p>
+<p><span style="color:brown;font-size:small">声明：以上内容均来自于GitHub用户<code>LittleWhite-Hai</code>，随便转载，但是请告诉我一下，点击左边的<code>联系我</code>来联系我。</span></p>
+
       
     </div>
 
@@ -390,6 +460,18 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/查找/" rel="tag"># 查找</a>
+          
+            <a href="/tags/树/" rel="tag"># 树</a>
+          
+        </div>
       
 
       
@@ -409,6 +491,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/20/散列表/" rel="prev" title="散列表(Hash Table)">
+                散列表(Hash Table) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -457,8 +543,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -477,7 +572,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -508,7 +603,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/随笔.html">
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -571,6 +666,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-3-B树"><span class="nav-number">1.</span> <span class="nav-text">2-3 B树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#插入操作"><span class="nav-number">1.1.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">1.2.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树"><span class="nav-number">2.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树的基本操作"><span class="nav-number">2.2.</span> <span class="nav-text">红黑树的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#左旋转："><span class="nav-number">2.2.1.</span> <span class="nav-text">左旋转：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右旋转"><span class="nav-number">2.2.2.</span> <span class="nav-text">右旋转: </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">2.3.</span> <span class="nav-text">插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#向一个2-结点插入新结点"><span class="nav-number">2.3.1.</span> <span class="nav-text">向一个2-结点插入新结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向一个3-结点插入新结点"><span class="nav-number">2.3.2.</span> <span class="nav-text">向一个3-结点插入新结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从下到上递归地调整树"><span class="nav-number">2.3.3.</span> <span class="nav-text">从下到上递归地调整树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">2.4.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#叶子结点"><span class="nav-number">2.5.</span> <span class="nav-text">叶子结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树中间的结点"><span class="nav-number">2.6.</span> <span class="nav-text">树中间的结点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能"><span class="nav-number">3.</span> <span class="nav-text">性能</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+  <link rel="manifest" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
+<meta name="keywords" content="数据结构,算法,查找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="散列表(Hash Table)">
+<meta property="og:url" content="http://yoursite.com/2018/06/20/散列表/index.html">
+<meta property="og:site_name" content="博主：Little-White">
+<meta property="og:description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/34hash/images/separate-chaining.png">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/34hash/images/linear-probing.png">
+<meta property="og:updated_time" content="2018-06-20T03:24:22.529Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="散列表(Hash Table)">
+<meta name="twitter:description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
+<meta name="twitter:image" content="https://algs4.cs.princeton.edu/34hash/images/separate-chaining.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/20/散列表/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>散列表(Hash Table) | 博主：Little-White</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博主：Little-White</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"><p <imag src="https://wx3.sinaimg.cn/mw690/005PyLUnly1fqcf8cxnp2j30hs0hsjrz.jpg" width="10"> </p></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">10</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">4</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">13</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-联系我">
+    <a href="/contact.html" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-phone"></i> <br />联系我</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/散列表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Little-White">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博主：Little-White">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">散列表(Hash Table)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T08:15:39+08:00">2018-06-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/章节总结/" itemprop="url" rel="index"><span itemprop="name">章节总结</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。<br>其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。<a id="more"></a></p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>散列表之所以能在常数时间内完成插入删除操作是因为它用的是数组来存储数据，支持它高效地查找的并不是二分搜索，而是索引直接定位。这对于小整数的键似乎可以实现，但是对于大整数，用数组很浪费空间，对于不是正整数的键，似乎也没有办法储存。但是我们可以用<strong>散列函数</strong>将大整数键或者非正整数键转换为合适大小的整数，并且尽量不产生重复的整数，然后将整数作为索引存入数组。然而不能保证这种办法真的可以不产生重复的索引，所以还要考虑重复索引的问题，对于重复的索引，要采取额外的手段解决。</p>
+<h1 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h1><h2 id="大整数"><a href="#大整数" class="headerlink" title="大整数"></a>大整数</h2><p>散列大整数最好的办法就是除留余数法，假如我们知道最终有M对键值（所以用大小为M的数组存最合适），键为正整数N，就可以用<code>N%M</code>的值作为数组的索引，这样做能够保证：</p>
+<ul>
+<li>N%M一定小于M，所以不会越界。</li>
+<li>对于值连续的键，这种散列函数可以保证散列地很均匀。</li>
+</ul>
+<p>如果键是随机分布的，M值的选取可以只考虑内存，但现实生活中的数字经常不是那么的随机，这时候M的值就要多考虑一个方面。举个例子，假设我们要将一个地区的100个5位纯数字车牌号散列，我们自然地想用100作为M，但是我们中国很多人为了图吉利喜欢在最后一位用6或者8，尽量避免4，如果用100作为M，最终散列出来的两位数一定有很多的6或者8，而很少有4，导致这个的原因就是用100作为M在散列的时候忽略了前两位，比如44466和66666和88866最终散列出来的都是66。作为一个坚定地以马克思主义作为指导思想的程序员，我们在选择索引的时候不会图吉利，我们只会考虑时间和内存，太多重复的散列值证明这个散列函数是差的。为了避免这种情况的发生，一般会选择素数作为M。</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>字符串也是用的除留余数法,方法在这<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> hash = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)</span><br><span class="line">    hash = (R * hash + s.charAt(i)) % M;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java中的常见类型"><a href="#Java中的常见类型" class="headerlink" title="Java中的常见类型"></a>Java中的常见类型</h2><p>java为常见的类型如String，File，Date，Double，URL都设计了散列函数（<code>HashCode()</code>)，方法就不一一介绍了，上面两个只是为了证明散列函数是可以实现的，<del>并不是</del>我不会。<br><code>HashCode()</code>函数会返回一个10位的10进制数，在使用的时候，我们根据数组的实际大小将这个10位的数字取余成想要的大小。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> (key.hashCode() &amp; <span class="number">0x7fffffff</span>) % M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="自定义类"><a href="#自定义类" class="headerlink" title="自定义类"></a>自定义类</h2><p>其实每个自定义类都默认继承了Object类的HashCode()方法，但是默认的散列函数返回的是根据这个对象所在地址产生的散列值。一台电脑上一般不会出现两个相同的地址，所以一对键值一旦插入就再也搜索不到了。<br>所以我们要为自己的类设计散列函数（必要时），其实方法很简单，并不需要从头开始设计，可以根据<strong>不可变的</strong>实例变量产生的散列值作为自定义类的散列值。</p>
+<p>散列函数可能会有点耗时，我们可以在类中定义一个变量储存它，这样除了第一次调用要计算外，后面的直接返回这个变量就行了。</p>
+<p>还有一个很重要的地方就是不仅要给自定义类设计hash函数，还要设计equals()函数。在碰到重复哈希值的时候，要用equals函数判断两个键是否相等，如果相等就替换，如果不相等要执行下面讲的办法。</p>
+<h1 id="重复哈希值的处理"><a href="#重复哈希值的处理" class="headerlink" title="重复哈希值的处理"></a>重复哈希值的处理</h1><p>我们可以做到让每个散列值落到每个数组索引的概率相等，但没有办法做到让每个键的散列值都不同于其它键的散列值，有了碰撞，就要有处理碰撞的办法，一般来说，有两种办法<del>,我只知道这两种</del>。</p>
+<h2 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h2><p>让大小为M的数组的每一个元素都保存一个链表，链表的每个结点保存了所有散列值为链表数组索引的键值对。每次插入时检查当前链表中是否已经存在此键，如果存在，就替换值，如果不存在就插入到这个链表中。<img src="https://algs4.cs.princeton.edu/34hash/images/separate-chaining.png" alt="拉链法图示"><br>另一种办法是每个数组保存的又是一个符号表，这样效率稍微低一点，但是可以重用代码。</p>
+<p>每条链表的平均长度为N/M，当这个值大于1的时候，意味着输入的键值对比数组长度大，但符号表仍然可以正常使用，只是效率会随着输入的增多而变低。我们可以动态地调整数组的大小来保证效率。</p>
+<h2 id="线性探测法"><a href="#线性探测法" class="headerlink" title="线性探测法"></a>线性探测法</h2><p><img src="https://algs4.cs.princeton.edu/34hash/images/linear-probing.png" alt="先行探测法"><br>线性探测法在插入时如果发现键的散列值作为数组的索引的位置已经被占用了，要检查当前键是否等于插入的键，如果相等就替换，如果不等于就查看索引+1的地址，直到末尾最后返回开头，找到没有被占用的地址就插进去。<br>查找操作也很类似，就不再赘述了。<br>使用线性探测法的符号表的删除操作有点麻烦，不能直接把待查找元素在数组中的索引对应的元素直接设为null，这样会导致后面的元素无法被查找，也不能把后面的直接向前移动一格，总之是比较麻烦的，需要注意的操作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (key == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"argument to delete() is null"</span>);</span><br><span class="line">     <span class="keyword">if</span> (!contains(key)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// find position i of key</span></span><br><span class="line">     <span class="keyword">int</span> i = hash(key);</span><br><span class="line">     <span class="keyword">while</span> (!key.equals(keys[i])) &#123;</span><br><span class="line">         i = (i + <span class="number">1</span>) % m;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// delete key and associated value</span></span><br><span class="line">     keys[i] = <span class="keyword">null</span>;</span><br><span class="line">     vals[i] = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// rehash all keys in same cluster</span></span><br><span class="line">     i = (i + <span class="number">1</span>) % m;</span><br><span class="line">     <span class="keyword">while</span> (keys[i] != <span class="keyword">null</span>) &#123;</span><br><span class="line">         <span class="comment">// delete keys[i] an vals[i] and reinsert</span></span><br><span class="line">         Key   keyToRehash = keys[i];</span><br><span class="line">         Value valToRehash = vals[i];</span><br><span class="line">         keys[i] = <span class="keyword">null</span>;</span><br><span class="line">         vals[i] = <span class="keyword">null</span>;</span><br><span class="line">         n--;</span><br><span class="line">         put(keyToRehash, valToRehash);</span><br><span class="line">         i = (i + <span class="number">1</span>) % m;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     n--;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// halves size of array if it's 12.5% full or less</span></span><br><span class="line">     <span class="keyword">if</span> (n &gt; <span class="number">0</span> &amp;&amp; n &lt;= m/<span class="number">8</span>) resize(m/<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">assert</span> <span class="title">check</span><span class="params">()</span></span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在线性探测法中，不能够让M小于N，甚至不能让M和N太接近，如果N/M达到1的话，散列表就会被占满，搜索就会一直循环。如果散列表保持在很满的状态下，就会出现很多很长的键簇。这会导致查找效率变低。</p>
+<h1 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h1><p>无论如何，哈希表的性能是非常不错的，基本能够稳定地保持常数时间，而且不会用掉太多内存。即使有这么优秀的数据结构，在使用也没有替换掉红黑树，因为hash表有一些缺点。</p>
+<ul>
+<li>要为每一种数据类型设计散列函数，这可能会很费心思。</li>
+<li>散列函数的计算可能比较耗时。</li>
+<li>有序性操作（很关键）</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/查找/" rel="tag"># 查找</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/18/平衡查找树/" rel="next" title="平衡查找树">
+                <i class="fa fa-chevron-left"></i> 平衡查找树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="Little-White" />
+            
+              <p class="site-author-name" itemprop="name">Little-White</p>
+              <p class="site-description motion-element" itemprop="description">我的技术（xue xi）博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Little-White-Hai" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:super@lihailong666.top" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#散列函数"><span class="nav-number">2.</span> <span class="nav-text">散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#大整数"><span class="nav-number">2.1.</span> <span class="nav-text">大整数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中的常见类型"><span class="nav-number">2.3.</span> <span class="nav-text">Java中的常见类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义类"><span class="nav-number">2.4.</span> <span class="nav-text">自定义类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重复哈希值的处理"><span class="nav-number">3.</span> <span class="nav-text">重复哈希值的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拉链法"><span class="nav-number">3.1.</span> <span class="nav-text">拉链法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性探测法"><span class="nav-number">3.2.</span> <span class="nav-text">线性探测法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能"><span class="nav-number">4.</span> <span class="nav-text">性能</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Little-White</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
