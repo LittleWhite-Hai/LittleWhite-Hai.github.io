@@ -101,20 +101,20 @@
 
 
 
-  <meta name="description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
-<meta name="keywords" content="数据结构,算法,查找">
+  <meta name="description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有支持常数时间操作的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
+<meta name="keywords" content="算法,数据结构,查找">
 <meta property="og:type" content="article">
 <meta property="og:title" content="散列表(Hash Table)">
 <meta property="og:url" content="http://yoursite.com/2018/06/20/散列表/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
+<meta property="og:description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有支持常数时间操作的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/34hash/images/separate-chaining.png">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/34hash/images/linear-probing.png">
-<meta property="og:updated_time" content="2018-06-20T03:24:22.529Z">
+<meta property="og:updated_time" content="2018-06-20T08:27:39.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="散列表(Hash Table)">
-<meta name="twitter:description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
+<meta name="twitter:description" content="散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有支持常数时间操作的数据结构，害我死掉那么多脑细胞。。。其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。">
 <meta name="twitter:image" content="https://algs4.cs.princeton.edu/34hash/images/separate-chaining.png">
 
 
@@ -229,7 +229,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">10</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">11</span></a>
   </li>
         
         
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">13</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">15</span></a>
   </li>
         
         
@@ -395,8 +395,8 @@
       
 
       
-        <p>散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有更好的数据结构，害我死掉那么多脑细胞。。。<br>其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。<a id="more"></a></p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>散列表之所以能在常数时间内完成插入删除操作是因为它用的是数组来存储数据，支持它高效地查找的并不是二分搜索，而是索引直接定位。这对于小整数的键似乎可以实现，但是对于大整数，用数组很浪费空间，对于不是正整数的键，似乎也没有办法储存。但是我们可以用<strong>散列函数</strong>将大整数键或者非正整数键转换为合适大小的整数，并且尽量不产生重复的整数，然后将整数作为索引存入数组。然而不能保证这种办法真的可以不产生重复的索引，所以还要考虑重复索引的问题，对于重复的索引，要采取额外的手段解决。</p>
+        <p>散列表是一种听起来很牛逼的数据结构，它居然可以在常数时间内完成插入搜索删除操作。第一次知道的时候的感觉不仅是惊叹，更多的是难受，因为辛苦研究了那么久的红黑树就是为了对数时间的操作，TM为啥不早说还有支持常数时间操作的数据结构，害我死掉那么多脑细胞。。。<br>其实散列表虽然听起来很省时间，但也不是万金油，它也有一些弊端。<a id="more"></a></p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>散列表之所以能在常数时间内完成插入删除操作是因为它用的是数组来存储数据，支持它高效地查找的并不是二分搜索，而是索引直接定位。这对于小整数的键似乎可以实现，但是对于大整数，用数组很浪费空间，对于不是正整数的键，似乎也没有办法储存。但是我们可以用<strong>散列函数</strong>将大整数键或者非正整数键转换为合适大小的整数，并且尽量不产生重复的整数，然后将整数作为索引存入数组。然而散列函数做不到真的不产生重复的散列值，所以还要要采取额外的手段解决重复散列值的问题。</p>
 <h1 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h1><h2 id="大整数"><a href="#大整数" class="headerlink" title="大整数"></a>大整数</h2><p>散列大整数最好的办法就是除留余数法，假如我们知道最终有M对键值（所以用大小为M的数组存最合适），键为正整数N，就可以用<code>N%M</code>的值作为数组的索引，这样做能够保证：</p>
 <ul>
 <li>N%M一定小于M，所以不会越界。</li>
@@ -404,7 +404,7 @@
 </ul>
 <p>如果键是随机分布的，M值的选取可以只考虑内存，但现实生活中的数字经常不是那么的随机，这时候M的值就要多考虑一个方面。举个例子，假设我们要将一个地区的100个5位纯数字车牌号散列，我们自然地想用100作为M，但是我们中国很多人为了图吉利喜欢在最后一位用6或者8，尽量避免4，如果用100作为M，最终散列出来的两位数一定有很多的6或者8，而很少有4，导致这个的原因就是用100作为M在散列的时候忽略了前两位，比如44466和66666和88866最终散列出来的都是66。作为一个坚定地以马克思主义作为指导思想的程序员，我们在选择索引的时候不会图吉利，我们只会考虑时间和内存，太多重复的散列值证明这个散列函数是差的。为了避免这种情况的发生，一般会选择素数作为M。</p>
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>字符串也是用的除留余数法,方法在这<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> hash = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)</span><br><span class="line">    hash = (R * hash + s.charAt(i)) % M;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Java中的常见类型"><a href="#Java中的常见类型" class="headerlink" title="Java中的常见类型"></a>Java中的常见类型</h2><p>java为常见的类型如String，File，Date，Double，URL都设计了散列函数（<code>HashCode()</code>)，方法就不一一介绍了，上面两个只是为了证明散列函数是可以实现的，<del>并不是</del>我不会。<br><code>HashCode()</code>函数会返回一个10位的10进制数，在使用的时候，我们根据数组的实际大小将这个10位的数字取余成想要的大小。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> (key.hashCode() &amp; <span class="number">0x7fffffff</span>) % M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java中的常见类型"><a href="#Java中的常见类型" class="headerlink" title="Java中的常见类型"></a>Java中的常见类型</h2><p>java为常见的类型如String，File，Date，Double，URL都设计了散列函数（<code>HashCode()</code>)，方法就不一一介绍了，上面两个只是为了证明散列函数是可以实现的，不介绍其它方法并不是我不会（<del>其实就是不会</del>）。<br><code>HashCode()</code>函数会返回一个10位的10进制数，在使用的时候，我们根据数组的实际大小将这个10位的数字取余成想要的大小。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> (key.hashCode() &amp; <span class="number">0x7fffffff</span>) % M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="自定义类"><a href="#自定义类" class="headerlink" title="自定义类"></a>自定义类</h2><p>其实每个自定义类都默认继承了Object类的HashCode()方法，但是默认的散列函数返回的是根据这个对象所在地址产生的散列值。一台电脑上一般不会出现两个相同的地址，所以一对键值一旦插入就再也搜索不到了。<br>所以我们要为自己的类设计散列函数（必要时），其实方法很简单，并不需要从头开始设计，可以根据<strong>不可变的</strong>实例变量产生的散列值作为自定义类的散列值。</p>
 <p>散列函数可能会有点耗时，我们可以在类中定义一个变量储存它，这样除了第一次调用要计算外，后面的直接返回这个变量就行了。</p>
 <p>还有一个很重要的地方就是不仅要给自定义类设计hash函数，还要设计equals()函数。在碰到重复哈希值的时候，要用equals函数判断两个键是否相等，如果相等就替换，如果不相等要执行下面讲的办法。</p>
@@ -417,7 +417,7 @@
 <ul>
 <li>要为每一种数据类型设计散列函数，这可能会很费心思。</li>
 <li>散列函数的计算可能比较耗时。</li>
-<li>有序性操作（很关键）</li>
+<li>不支持有序性操作（很关键）。</li>
 </ul>
 
       
@@ -439,9 +439,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
-          
             <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
           
             <a href="/tags/查找/" rel="tag"># 查找</a>
           
@@ -465,6 +465,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/25/无向图/" rel="prev" title="无向图(Undirected Graphs)">
+                无向图(Undirected Graphs) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -542,7 +546,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -596,7 +600,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

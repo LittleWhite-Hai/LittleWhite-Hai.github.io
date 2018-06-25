@@ -101,24 +101,30 @@
 
 
 
-  <meta name="description" content="这是正常文字 这应该是蓝色的字">
+  <meta name="description" content="有向图的 API 比无向图多了一个reverse方法，用来返回一个和当前图相反的图。其它的方法就除了addEdge里少了一行代码之外完全一样,简单到让人不敢相信。更令人惊讶的是，适用于无向图的深度优先路径和广度优先路径不用改任何一点就能移植到有向图中。那我们还讲啥呢  ?">
+<meta name="keywords" content="算法,数据结构,图">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试专用文章">
-<meta property="og:url" content="http://yoursite.com/2017/05/01/测试专用文章/index.html">
+<meta property="og:title" content="有向图（Digraph）">
+<meta property="og:url" content="http://yoursite.com/2018/06/25/有向图/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="这是正常文字 这应该是蓝色的字">
+<meta property="og:description" content="有向图的 API 比无向图多了一个reverse方法，用来返回一个和当前图相反的图。其它的方法就除了addEdge里少了一行代码之外完全一样,简单到让人不敢相信。更令人惊讶的是，适用于无向图的深度优先路径和广度优先路径不用改任何一点就能移植到有向图中。那我们还讲啥呢  ?">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-05T12:41:54.306Z">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/42digraph/images/digraph-api.png">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsn6tr6lxlj301n01nq2p.jpg">
+<meta property="og:image" content="https://algs4.cs.princeton.edu/42digraph/images/depth-first-orders.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/834468/201703/834468-20170314140340573-1430796760.png">
+<meta property="og:updated_time" content="2018-06-25T12:07:07.464Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试专用文章">
-<meta name="twitter:description" content="这是正常文字 这应该是蓝色的字">
+<meta name="twitter:title" content="有向图（Digraph）">
+<meta name="twitter:description" content="有向图的 API 比无向图多了一个reverse方法，用来返回一个和当前图相反的图。其它的方法就除了addEdge里少了一行代码之外完全一样,简单到让人不敢相信。更令人惊讶的是，适用于无向图的深度优先路径和广度优先路径不用改任何一点就能移植到有向图中。那我们还讲啥呢  ?">
+<meta name="twitter:image" content="https://algs4.cs.princeton.edu/42digraph/images/digraph-api.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/01/测试专用文章/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/25/有向图/"/>
 
 
 
@@ -128,7 +134,7 @@
   };
 </script>
 
-  <title>测试专用文章 | 博主：Little-White</title>
+  <title>有向图（Digraph） | 博主：Little-White</title>
   
 
 
@@ -300,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/测试专用文章/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/有向图/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Little-White">
@@ -317,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">测试专用文章
+          <h1 class="post-title" itemprop="name headline">有向图（Digraph）
               
             
           </h1>
@@ -336,7 +342,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T19:46:07+08:00">2017-05-01</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-25T09:21:47+08:00">2018-06-25</time>
             
 
             
@@ -345,6 +351,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/章节总结/" itemprop="url" rel="index"><span itemprop="name">章节总结</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -373,9 +397,18 @@
       
 
       
-        <p>这是正常文字</p>
-<p><font size="2" color="blue">这应该是蓝色的字</font><br><a id="more"></a><br>例如你周三练完后，胸疼，胳膊疼（肱三头肌）。然后训练后第2、3天是酸痛的高峰期，你会发现，周四根本就不用练，周五的动作是背部和肱二头肌，都是“拉”的动作，根本就没有“推”的动作，不会用到胸肌和肱三头肌，跟你的酸痛屁关系没有。周六再休息一天。等到周日你练肩了，有推的动作了，会用到肱三头肌了。此时你的肱三头肌已经休息了整整4天了，酸痛早就散退了，哪怕还遗留一点点小酸，也根本就不会受影响。所以在问这个问题之前，最好先回头审视下自己的训练计划，是否合理。增肌训练并不是让你每天都练同一个部位，而是要学会分化训练。</p>
-<p>作者：卓恒<br>链接：<a href="https://zhuanlan.zhihu.com/p/20477240" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/20477240</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+        <p>有向图的 API 比无向图多了一个reverse方法，用来返回一个和当前图相反的图。其它的方法就除了addEdge里少了一行代码之外完全一样,简单到让人不敢相信。<br><img src="https://algs4.cs.princeton.edu/42digraph/images/digraph-api.png" alt="无向图API"><br>更令人惊讶的是，适用于无向图的深度优先路径和广度优先路径不用改任何一点就能移植到有向图中。<br>那我们还讲啥呢  ? <img src="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsn6tr6lxlj301n01nq2p.jpg" alt="摊手">  <a id="more"></a></p>
+<p>没关系，虽然基础方法一样，但是在使用这些基础方法的时候，有向图要比无向图复杂的多，所以我们有得讲。</p>
+<h1 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h1><p>课程安排，产品加工，任务调度，它们很多时候的一个课程/加工/任务都是另一个的条件，必须完成它才能完成下一个。这个问题对应到有向图上，就是对于任意w—&gt;v,要保证w在v之前出现。那么如何才能找到这样的顺序呢？</p>
+<h2 id="不能出现有向环"><a href="#不能出现有向环" class="headerlink" title="不能出现有向环"></a>不能出现有向环</h2><p>首先要明确的是，在这类问题中是没有有向环的，因为有向环在实际中也不会出现（比如要入某个市的户籍就要有隶属于那个市某公司的工作证，要拿到工作证就要有那个市的房产证，要想在那个市买房就要有那个市的户籍，这种问题没办法解决），所以拿到一个有向图的第一步就是检测图中的有向环<a href="https://algs4.cs.princeton.edu/42digraph/DirectedCycle.java.html" target="_blank" rel="noopener">DirectedCycle.java</a> 。</p>
+<h2 id="逆后序顺序"><a href="#逆后序顺序" class="headerlink" title="逆后序顺序"></a>逆后序顺序</h2><p>我们在遍历一个图的时候，也会按照一定顺序入或出所有的结点，在入或者出的时候可以把这个顺序记下来（只记入或者只记出）。这个顺序不是我们要的拓扑排序，但把它加工一下之后就是了（<a href="https://algs4.cs.princeton.edu/42digraph/DepthFirstOrder.java.html" target="_blank" rel="noopener">逆后序</a>）。<br><img src="https://algs4.cs.princeton.edu/42digraph/images/depth-first-orders.png" alt="逆后序"><br>对于任意的w —&gt;v ，当w调用的时候，可能会有下面几种情况</p>
+<ol>
+<li>v已经调用且返回过了，已经在栈里。</li>
+<li>v还没调用，那它将会在w结束之前结束，也会比w提前放入栈里。</li>
+<li>v在调用还没返回。不可能出现这种情况，因为没有有向环。</li>
+</ol>
+<p>对于w —&gt;v无论如何，w最终都会排在v前面，符合我们对拓扑排序的要求。</p>
+<h1 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h1><p>（参考cnblogs用户 nullzx 的<a href="https://www.cnblogs.com/nullzx/p/6437926.html" target="_blank" rel="noopener">博客</a>）<br>在无向图中，连通分量很好找，只需要从0到v-1遍历顶点，在同一个dfs递归中的所有顶点就在一个分量里。在有向图中，如果有v—&gt;w，那么v到w是可达的，但是它们却不一定在同一个强连通分量中。在有向图中，如果有v—&gt;w且w—&gt;v，那么它们俩就在一个强连通分量里。<br>快速地在有向图中找到所有强连通分量是比较复杂的一件事，请看例子<br><img src="http://images2015.cnblogs.com/blog/834468/201703/834468-20170314140340573-1430796760.png" alt="例子"><br>假设我们使用无向图的方法，设B5为源顶点进行深度优先搜索，那么B3，B4，B5会在第一个递归中出现，然后A0，A1，A2在第二个递归中出现，最后划分的连通分量符合我们的要求。<br>但是如果源顶点是A2呢，那么这六个顶点就会在同一个递归中，相应地就会分在同一个分量里，不符合我们的要求。<br>稍微分析一下上面的情况，我们会得到一个朴素的要求：在深度优先搜索的时候，被指向的强连通分量要先于指向它的那个强连通分量进行搜索。<br>然后看看条件是否能够放宽一点，具体一点：被指向的强连通分量中的任一顶点（一个就够了）要在指向它的强连通分量顶点（所有）之前搜索。<br>那么我们要怎么找到这个顺序呢？<br>拓扑排序会将（所有）被指顶点的放在指向它们顶点的后面，和我们的要求正好相反，那我们可以将原图reverse一下，然后再拓扑排序（逆后序），这样就符合我们的要求了！如果你还有点犹豫不敢相信，请看逆后序遍历的最后一句话。<br>这是代码 <a href="https://algs4.cs.princeton.edu/42digraph/KosarajuSharirSCC.java.html" target="_blank" rel="noopener">KosarajuSharirSCC.java</a>。</p>
 
       
     </div>
@@ -394,6 +427,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/图/" rel="tag"># 图</a>
+          
+        </div>
+      
 
       
       
@@ -403,15 +446,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/06/25/无向图/" rel="next" title="无向图(Undirected Graphs)">
+                <i class="fa fa-chevron-left"></i> 无向图(Undirected Graphs)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/28/暂时搁置coursera上的课程吧/" rel="prev" title="暂时搁置coursera上的课程吧">
-                暂时搁置coursera上的课程吧 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -460,8 +503,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -576,6 +628,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#拓扑排序"><span class="nav-number">1.</span> <span class="nav-text">拓扑排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不能出现有向环"><span class="nav-number">1.1.</span> <span class="nav-text">不能出现有向环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆后序顺序"><span class="nav-number">1.2.</span> <span class="nav-text">逆后序顺序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强连通分量"><span class="nav-number">2.</span> <span class="nav-text">强连通分量</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
