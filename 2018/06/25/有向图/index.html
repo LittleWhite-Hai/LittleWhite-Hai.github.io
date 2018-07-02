@@ -102,7 +102,7 @@
 
 
   <meta name="description" content="有向图的 API 比无向图多了一个reverse方法，用来返回一个和当前图相反的图。其它的方法就除了addEdge里少了一行代码之外完全一样,简单到让人不敢相信。更令人惊讶的是，适用于无向图的深度优先路径和广度优先路径不用改任何一点就能移植到有向图中。那我们还讲啥呢  ?">
-<meta name="keywords" content="算法,数据结构,图">
+<meta name="keywords" content="数据结构,算法,图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有向图（Digraph）">
 <meta property="og:url" content="http://yoursite.com/2018/06/25/有向图/index.html">
@@ -112,8 +112,8 @@
 <meta property="og:image" content="https://algs4.cs.princeton.edu/42digraph/images/digraph-api.png">
 <meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUngy1fsn6tr6lxlj301n01nq2p.jpg">
 <meta property="og:image" content="https://algs4.cs.princeton.edu/42digraph/images/depth-first-orders.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/834468/201703/834468-20170314140340573-1430796760.png">
-<meta property="og:updated_time" content="2018-06-25T12:07:07.464Z">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/005PyLUngy1fsnowxzpb9j30hs078q4o.jpg">
+<meta property="og:updated_time" content="2018-06-25T12:21:18.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="有向图（Digraph）">
 <meta name="twitter:description" content="有向图的 API 比无向图多了一个reverse方法，用来返回一个和当前图相反的图。其它的方法就除了addEdge里少了一行代码之外完全一样,简单到让人不敢相信。更令人惊讶的是，适用于无向图的深度优先路径和广度优先路径不用改任何一点就能移植到有向图中。那我们还讲啥呢  ?">
@@ -247,7 +247,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">15</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">16</span></a>
   </li>
         
         
@@ -408,7 +408,7 @@
 <li>v在调用还没返回。不可能出现这种情况，因为没有有向环。</li>
 </ol>
 <p>对于w —&gt;v无论如何，w最终都会排在v前面，符合我们对拓扑排序的要求。</p>
-<h1 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h1><p>（参考cnblogs用户 nullzx 的<a href="https://www.cnblogs.com/nullzx/p/6437926.html" target="_blank" rel="noopener">博客</a>）<br>在无向图中，连通分量很好找，只需要从0到v-1遍历顶点，在同一个dfs递归中的所有顶点就在一个分量里。在有向图中，如果有v—&gt;w，那么v到w是可达的，但是它们却不一定在同一个强连通分量中。在有向图中，如果有v—&gt;w且w—&gt;v，那么它们俩就在一个强连通分量里。<br>快速地在有向图中找到所有强连通分量是比较复杂的一件事，请看例子<br><img src="http://images2015.cnblogs.com/blog/834468/201703/834468-20170314140340573-1430796760.png" alt="例子"><br>假设我们使用无向图的方法，设B5为源顶点进行深度优先搜索，那么B3，B4，B5会在第一个递归中出现，然后A0，A1，A2在第二个递归中出现，最后划分的连通分量符合我们的要求。<br>但是如果源顶点是A2呢，那么这六个顶点就会在同一个递归中，相应地就会分在同一个分量里，不符合我们的要求。<br>稍微分析一下上面的情况，我们会得到一个朴素的要求：在深度优先搜索的时候，被指向的强连通分量要先于指向它的那个强连通分量进行搜索。<br>然后看看条件是否能够放宽一点，具体一点：被指向的强连通分量中的任一顶点（一个就够了）要在指向它的强连通分量顶点（所有）之前搜索。<br>那么我们要怎么找到这个顺序呢？<br>拓扑排序会将（所有）被指顶点的放在指向它们顶点的后面，和我们的要求正好相反，那我们可以将原图reverse一下，然后再拓扑排序（逆后序），这样就符合我们的要求了！如果你还有点犹豫不敢相信，请看逆后序遍历的最后一句话。<br>这是代码 <a href="https://algs4.cs.princeton.edu/42digraph/KosarajuSharirSCC.java.html" target="_blank" rel="noopener">KosarajuSharirSCC.java</a>。</p>
+<h1 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h1><p>（参考cnblogs用户 nullzx 的<a href="https://www.cnblogs.com/nullzx/p/6437926.html" target="_blank" rel="noopener">博客</a>）<br>在无向图中，连通分量很好找，只需要从0到v-1遍历顶点，在同一个dfs递归中的所有顶点就在一个分量里。在有向图中，如果有v—&gt;w，那么v到w是可达的，但是它们却不一定在同一个强连通分量中。在有向图中，如果有v—&gt;w且w—&gt;v，那么它们俩就在一个强连通分量里。<br>快速地在有向图中找到所有强连通分量是比较复杂的一件事，请看例子<br><img src="https://wx2.sinaimg.cn/mw690/005PyLUngy1fsnowxzpb9j30hs078q4o.jpg" alt="例子"><br>假设我们使用无向图的方法，设B5为源顶点进行深度优先搜索，那么B3，B4，B5会在第一个递归中出现，然后A0，A1，A2在第二个递归中出现，最后划分的连通分量符合我们的要求。<br>但是如果源顶点是A2呢，那么这六个顶点就会在同一个递归中，相应地就会分在同一个分量里，不符合我们的要求。<br>稍微分析一下上面的情况，我们会得到一个朴素的要求：在深度优先搜索的时候，被指向的强连通分量要先于指向它的那个强连通分量进行搜索。<br>然后看看条件是否能够放宽一点，具体一点：被指向的强连通分量中的任一顶点（一个就够了）要在指向它的强连通分量顶点（所有）之前搜索。<br>那么我们要怎么找到这个顺序呢？<br>拓扑排序会将（所有）被指顶点的放在指向它们顶点的后面，和我们的要求正好相反，那我们可以将原图reverse一下，然后再拓扑排序（逆后序），这样就符合我们的要求了！如果你还有点犹豫不敢相信，请看逆后序遍历的最后一句话。<br>这是代码 <a href="https://algs4.cs.princeton.edu/42digraph/KosarajuSharirSCC.java.html" target="_blank" rel="noopener">KosarajuSharirSCC.java</a>。</p>
 
       
     </div>
@@ -429,9 +429,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
-          
             <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
             <a href="/tags/图/" rel="tag"># 图</a>
           
@@ -455,6 +455,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/01/最近共同祖先/" rel="prev" title="最近共同祖先（作业WordNet）">
+                最近共同祖先（作业WordNet） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -532,7 +536,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

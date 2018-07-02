@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+  <link rel="manifest" href="https://wx4.sinaimg.cn/mw690/005PyLUngy1fqh2x66gc6j30hs0hsjrz.jpg">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="用了一下午学用Git，我的作业终于成功上传到Github上去了! 那里还有我以前做过的，除了前两次的作业没适应，其它都是满分高质量的，欢迎交流学习。">
+<meta name="keywords" content="算法,图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最近共同祖先（作业WordNet）">
+<meta property="og:url" content="http://yoursite.com/2018/07/01/最近共同祖先/index.html">
+<meta property="og:site_name" content="博主：Little-White">
+<meta property="og:description" content="用了一下午学用Git，我的作业终于成功上传到Github上去了! 那里还有我以前做过的，除了前两次的作业没适应，其它都是满分高质量的，欢迎交流学习。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-event.png">
+<meta property="og:image" content="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-synsets.png">
+<meta property="og:image" content="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-hypernyms.png">
+<meta property="og:image" content="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-sca.png">
+<meta property="og:image" content="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-sca-set.png">
+<meta property="og:updated_time" content="2018-07-02T07:18:28.393Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最近共同祖先（作业WordNet）">
+<meta name="twitter:description" content="用了一下午学用Git，我的作业终于成功上传到Github上去了! 那里还有我以前做过的，除了前两次的作业没适应，其它都是满分高质量的，欢迎交流学习。">
+<meta name="twitter:image" content="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-event.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/01/最近共同祖先/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>最近共同祖先（作业WordNet） | 博主：Little-White</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">博主：Little-White</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"><p <imag src="https://wx3.sinaimg.cn/mw690/005PyLUnly1fqcf8cxnp2j30hs0hsjrz.jpg" width="10"> </p></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">11</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">4</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">16</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-联系我">
+    <a href="/contact.html" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-phone"></i> <br />联系我</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/最近共同祖先/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Little-White">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博主：Little-White">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">最近共同祖先（作业WordNet）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T20:13:14+08:00">2018-07-01</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/作业报告/" itemprop="url" rel="index"><span itemprop="name">作业报告</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用了一下午学用Git，我的作业终于成功<a href="https://github.com/LittleWhite-Hai/AlgorithmAssignment" target="_blank" rel="noopener">上传到Github上去了!</a> 那里还有我以前做过的，除了前两次的作业没适应，其它都是满分高质量的，欢迎交流学习。<a id="more"></a></p>
+<p>最近共同祖先在leetcode上有这道算法题，这次作业把它放到一个具体应用（WordNet（词网））上实现了，虽然是应用，但却没有降低难度，反而把要求泛化了。</p>
+<h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><p>首先说明最近共同祖先是个什么东西，百度百科是这样说的:</p>
+<blockquote>
+<p>对于有根树T的两个结点u、v，最近公共祖先LCA(T,u,v)表示一个结点x，满足x是u、v的祖先且x的深度尽可能大。</p>
+</blockquote>
+<p>换个角度说，在一个有根树中两个结点都能到达的结点就是它们的共同祖先，离他们最近那一个就是最近共同祖先。<br>举个栗子 <img src="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-event.png" alt="WordNet"><br>上图中，<code>miracle</code> 和<code>group_action</code> 的最近共同祖先就是<code>event</code>。<br><code>transition</code> 和<code>jump leap</code>的最近共同祖先是 <code>change alteration modification</code><br>找最近共同祖先在WordNet中当然很有意义，比如我们在要去洗澡时想问室友有没有带<code>肥皂</code>，<code>洗发水</code>，<code>搓澡巾</code>啥的，我们通常不会把它们一个个都列举出来问，而是找一个概括性的词比如<code>洗漱用品</code>来代替，这样既能节省时间又可以把本来的意思表达清楚。<code>洗漱用品</code>就是<code>肥皂</code>，<code>洗发水</code>，<code>搓澡巾</code>的最近共同祖先，当然它们仨也有其它祖先，比如<code>物体</code>，<code>商品</code>啥的，但这些都不是最近的，使用较远的共同祖先，别人就会很难get到你到底想说啥。</p>
+<h1 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h1><p>如果这单单是个有向图的题目就会好办很多，但这是应用，顶点不是数字而是单词，所以就要把输入的原始数据转化成合适的数据结构。题目给了我们大概的思路：用一个WordNet类暴露给客户代码，组织结构，SAP类（shortest ancestors path）作为核心类干实事（找最近共同祖先）。</p>
+<h2 id="WordNet"><a href="#WordNet" class="headerlink" title="WordNet"></a>WordNet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordNet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// constructor takes the name of the two input files</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">WordNet</span><span class="params">(String synsets, String hypernyms)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="comment">// returns all WordNet nouns</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> Iterable&lt;String&gt; <span class="title">nouns</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isNoun</span><span class="params">(String word)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distance</span><span class="params">(String nounA, String nounB)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> String <span class="title">sap</span><span class="params">(String nounA, String nounB)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="comment">// do unit testing of this class</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>构造器接收的两个字符串其实是两个文件，sysets是这样的 <img src="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-synsets.png" alt="sysets"><br>每一行代表一个词集，由三部分组成，逗号隔开，第一部分是Id，每个词集都会有唯一的Id，第二部分是词集本身，它可能由多个相同意思的名词组成，由空格隔开，第三部分是这个词集的释义，在作业中用不到。<br>hypernyms是这样的 <img src="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-hypernyms.png" alt="hupernyms"><br>每一行由两部分组成，后面的Id（从第二个到最后一个）是第一个Id的直接邻居（有向图），从树的角度说就是它的父节点。<br>题目要求的功能有：</p>
+<ol>
+<li>迭代出所有名词（不是词集）</li>
+<li>判断一个名词是否在词网中里。</li>
+<li>给定两个名词（字符串形式），返回它们的距离（int）。</li>
+<li>给定两个名词（字符串形式），返回他们最近共同祖先（String）</li>
+</ol>
+<p>性能要求：占用空间正比于输入文件大小，构造器时间要求正比于输入文件大小，isNoun要求是所有名词大小的对数时间，其他的都要求正比于V+E。<br>作业对WordNet的定义就是没有环的单根有向图，所以构造器要检测最终的图是否符合要求，如果含有有向环或者多个结点，那么要抛出IllegalArgumentException异常。</p>
+<h3 id="SAP"><a href="#SAP" class="headerlink" title="SAP"></a>SAP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SAP</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// constructor takes a digraph (not necessarily a DAG)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">SAP</span><span class="params">(Digraph G)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">ancestor</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">(Iterable&lt;Integer&gt; v, Iterable&lt;Integer&gt; w)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">ancestor</span><span class="params">(Iterable&lt;Integer&gt; v, Iterable&lt;Integer&gt; w)</span></span></span><br><span class="line"><span class="function">   <span class="comment">// do unit testing of this class</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>对于length和ancestor方法，SAP要求分别实现两种版本，一种是查找两个顶点的最近共同祖先的，另一种是查找两个集合的最近共同祖先的（返回两个集合中最近的两个顶点的最近共同祖先）<br>单元素版本：<br><img src="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-sca.png" alt="单元素"><br>集合版本：<br><img src="http://coursera.cs.princeton.edu/algs4/assignments/wordnet-sca-set.png" alt="集合"><br>这个类的难点在于：虽然WordNet中要求是单根DAG，但是在SAP中却可以是任意图，。我一开始没看清要求，完全是按照单根DAG的设定写的，所以为了追求性能犯下了滔天大错，浪费了我整整三天时间想错在哪了。<br>性能要求：所有操作在最坏情况下正比于V+E。</p>
+<h3 id="Outcast"><a href="#Outcast" class="headerlink" title="Outcast"></a>Outcast</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outcast</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Outcast</span><span class="params">(WordNet wordnet)</span>         </span></span><br><span class="line"><span class="function">   <span class="comment">// constructor takes a WordNet object</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> String <span class="title">outcast</span><span class="params">(String[] nouns)</span>  </span></span><br><span class="line"><span class="function">   <span class="comment">// given an array of WordNet nouns, return an outcast</span></span></span><br><span class="line"><span class="function">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Outcast应该算是SAP的一个应用类吧，要求给定一组名词，找到与所有名词距离最远的那一个，题目已经给出了做法了（这题没啥存在感）</p>
+<blockquote>
+<p> To identify an outcast, compute the sum of the distances between each noun and every other one:<br>di   =   distance(xi, x1)   +   distance(xi, x2)   +   …   +   distance(xi, xn)</p>
+</blockquote>
+<p>性能要求：毕竟是应用，对性能没要求。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="WordNet-1"><a href="#WordNet-1" class="headerlink" title="WordNet"></a>WordNet</h2><p>WordNet的难点都在构造器上，其他方法就是调用一下函数，所以下面的内容大部分是围绕构造器来的。<br>根据题目要求，为这个类构建两个符号表和一个SAP，两个符号表分别进行查找和返回操作：一个用名词作为键，id作为值，一个用id作为键，名词作为值。SAP按照hypernyms.txt文件来构建。在distance（）和sap（）中，方法先把两个String参数用一个符号表查找它们的Id，然后通过SAP搜索两个Id的最短距离或者最近共同祖先的Id，用这个Id再在另一个符号表中查找它对应的词集，最后返回即可。<br>但是问题没那么简单，因为：</p>
+<ol>
+<li>一个id可能对应一个词集里的多个名词，题目要求对于任意一个名词进行查找都能有效。</li>
+<li>一个名词可能出现在多个词集里，对于这种情况，题目要求找出与另一参数最近的那一个返回，如果另一参数也包括多个名词，那么就找两个集合中最近的那一对。</li>
+</ol>
+<p>解决办法是：</p>
+<ol>
+<li>在第一个符号表中，将词集中的每个名词都添加到符号表，值都为词集的Id。</li>
+<li>将第一个符号表中的值都用一个链表代替，链表每个元素为一个Id，在每次插入名词前先进行查找，如果符号表中已经存在此键，则将Id加入此键对应的链表中。distance()和sap()方法基本不用变，因为SAP类中有对应集合的方法。</li>
+</ol>
+<p>题目要求distance()和sap()方法性能正比于无向图的尺寸，就是说和名词数量没有关系，又因为这题不需要用到有序性相关操作，所以最合适的符号表就是HashMap。</p>
+<p>题目还要求检测图是否是DAG和是否是单根有向图，方法是：</p>
+<ol>
+<li>判断DAG很容易，对图进行一次DFS，如果发现在同一个栈帧中，一个顶点出现两次，那么这个图就不是DAG。</li>
+<li>判断root要绕一点，首先要清楚root的性质：没有直接邻居，就是说调用它的adj（），返回的迭代器不包含任何元素。利用这个性质可以判断顶点是否是root并记录下root的值，如果发现某一个root不等于已经存在过的那个root，这个图就不是单根图。</li>
+</ol>
+<p>代码有点多，不是必要就不传了，想要源代码的欢迎来我的<a href="https://github.com/LittleWhite-Hai/AlgorithmAssignment" target="_blank" rel="noopener">Github</a>拿。</p>
+<h2 id="SAP-1"><a href="#SAP-1" class="headerlink" title="SAP"></a>SAP</h2><p>SAP非常简单，先从单个元素的版本说起：<br>分别对参数v和w进行广度优先搜索，并保留它们到图中所有顶点的可达性 mark[] 和到可达顶点的距离 dis[]，然后同时两个遍历mark[]，如果发现某一个顶点同时被mark了，那么把它们的距离加起来和之前的最短距离比较，如果比之前的最短距离小，就把最短距离重设为当前距离，最近共同祖先设置为当前顶点，遍历完成后，最短距离和最近共同祖先就出现了，如果始终没有被同时mark的顶点，那么返回-1。<br>多元素版本：<br>广度优先搜索开始之前，将v和w中的所有元素分别加到待会要用的两个队列里，后面的操作就和单元素的版本一样了。</p>
+<h2 id="Outcast-1"><a href="#Outcast-1" class="headerlink" title="Outcast"></a>Outcast</h2><p>这个很简单不讲了，之所以还写这么点字就是想说并不是忘了写Outcast。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/图/" rel="tag"># 图</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/25/有向图/" rel="next" title="有向图（Digraph）">
+                <i class="fa fa-chevron-left"></i> 有向图（Digraph）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="Little-White" />
+            
+              <p class="site-author-name" itemprop="name">Little-White</p>
+              <p class="site-description motion-element" itemprop="description">我的技术（xue xi）博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Little-White-Hai" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:super@lihailong666.top" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总览"><span class="nav-number">1.</span> <span class="nav-text">总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目要求"><span class="nav-number">2.</span> <span class="nav-text">题目要求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WordNet"><span class="nav-number">2.1.</span> <span class="nav-text">WordNet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SAP"><span class="nav-number">2.1.1.</span> <span class="nav-text">SAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outcast"><span class="nav-number">2.1.2.</span> <span class="nav-text">Outcast</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WordNet-1"><span class="nav-number">3.1.</span> <span class="nav-text">WordNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAP-1"><span class="nav-number">3.2.</span> <span class="nav-text">SAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outcast-1"><span class="nav-number">3.3.</span> <span class="nav-text">Outcast</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Little-White</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
