@@ -101,23 +101,28 @@
 
 
 
-  <meta name="description" content="我的技术（xue xi）博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="博主：Little-White">
-<meta property="og:url" content="http://yoursite.com/tags/数据结构/index.html">
+  <meta name="description" content="最近在看严奶奶的《数据结构》，准备实现一下里面的算法代码，因为好久没用c了，而这本书里的代码都是c++，所以在实现的时候碰到了一些问题，比如这个malloc的问题。">
+<meta name="keywords" content="c,内存作用域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="malloc与内存作用域">
+<meta property="og:url" content="http://yoursite.com/2018/07/13/malloc与内存作用域/index.html">
 <meta property="og:site_name" content="博主：Little-White">
-<meta property="og:description" content="我的技术（xue xi）博客">
+<meta property="og:description" content="最近在看严奶奶的《数据结构》，准备实现一下里面的算法代码，因为好久没用c了，而这本书里的代码都是c++，所以在实现的时候碰到了一些问题，比如这个malloc的问题。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005PyLUnly1ft807wz4zcj312p0j9q4w.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/005PyLUnly1ft8csaa8lkj30o50h23yz.jpg">
+<meta property="og:updated_time" content="2018-07-13T09:28:50.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="博主：Little-White">
-<meta name="twitter:description" content="我的技术（xue xi）博客">
+<meta name="twitter:title" content="malloc与内存作用域">
+<meta name="twitter:description" content="最近在看严奶奶的《数据结构》，准备实现一下里面的算法代码，因为好久没用c了，而这本书里的代码都是c++，所以在实现的时候碰到了一些问题，比如这个malloc的问题。">
+<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/005PyLUnly1ft807wz4zcj312p0j9q4w.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/数据结构/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/13/malloc与内存作用域/"/>
 
 
 
@@ -127,7 +132,7 @@
   };
 </script>
 
-  <title>标签: 数据结构 | 博主：Little-White</title>
+  <title>malloc与内存作用域 | 博主：Little-White</title>
   
 
 
@@ -174,7 +179,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -222,7 +227,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">13</span></a>
   </li>
@@ -279,196 +284,192 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>数据结构<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/malloc与内存作用域/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Little-White">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="博主：Little-White">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/25/有向图/" itemprop="url">
-              
-                <span itemprop="name">有向图（Digraph）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">malloc与内存作用域
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-25T09:21:47+08:00"
-              content="2018-06-25" >
-          06-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+                
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T09:44:45+08:00">2018-07-13</time>
+            
 
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/masterpiece/" itemprop="url" rel="index"><span itemprop="name">masterpiece</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/20/散列表/" itemprop="url">
-              
-                <span itemprop="name">散列表(Hash Table)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-20T08:15:39+08:00"
-              content="2018-06-20" >
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/18/平衡查找树/" itemprop="url">
-              
-                <span itemprop="name">平衡查找树</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-18T15:27:00+08:00"
-              content="2018-06-18" >
-          06-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/18/二叉查找树/" itemprop="url">
-              
-                <span itemprop="name">二叉查找树</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-18T08:33:34+08:00"
-              content="2018-06-18" >
-          06-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/17/符号表/" itemprop="url">
-              
-                <span itemprop="name">基础符号表</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-17T20:00:16+08:00"
-              content="2018-06-17" >
-          06-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>最近在看严奶奶的《数据结构》，准备实现一下里面的算法代码，因为好久没用c了，而这本书里的代码都是c++，所以在实现的时候碰到了一些问题，比如这个malloc的问题。<a id="more"></a></p>
+<p>下面是书上的关于单链表的数据结构和给单链表插入结点的代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> &#123;</span></span><br><span class="line">	ElemType info;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line"></span><br><span class="line">&#125;LNode, *LinkList;</span><br><span class="line"></span><br><span class="line"><span class="function">status <span class="title">ListInsert_L</span><span class="params">(LinkList &amp;L,<span class="keyword">int</span> i,Elemtype &amp;e)</span></span></span><br><span class="line"><span class="function"><span class="comment">/*在链表第i个元素前插入一个值e*/</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">LinkList p,q;</span><br><span class="line">p=L;</span><br><span class="line"><span class="keyword">while</span>(p&amp;&amp;j&lt;i<span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    p=p-&gt;next;</span><br><span class="line">    j++;</span><br><span class="line">&#125;</span><br><span class="line">q=(LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">q-&gt;infu=e;</span><br><span class="line">q-&gt;next=p-&gt;next;</span><br><span class="line">p-&gt;next=q;</span><br><span class="line"><span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>malloc</code>这个关键字很早就听说过了，可是从来没在书上正式学过这个东西，只是模糊地知道它相比于直接声明变量需要手动申请内存和释放内存，不知道其它的什么作用。所以在书上看到11到14行这段初始化结构体的代码的时候感觉写得太累赘了，然后把它改成了<code>LNode t={ e,p-&gt;next };</code><br><code>p-&gt;next=t</code>结果在最后测试的时候发现是这个样子的<img src="https://wx3.sinaimg.cn/mw690/005PyLUnly1ft807wz4zcj312p0j9q4w.jpg" alt="发现错误">从代码上可以看到，在一个单链表中依次在第一个结点位置插入<code>info</code>为7,8,4三个结点，最后链表的情况应该为{ }-&gt;{4}-&gt;{8}-&gt;{7}，但在变量窗口却发现最后的链表三个结点的内存却都是一个地址，原因就在于直接申明结构体变量所得到的内存作用域只在本函数中，当下一次再调用此函数就会自动释放上次所申请的内存。当<code>ListInsert_L(list, 1, 8);</code>调用的时候<code>ListInsert_L(list, 1, 7);</code>所申请的结点地址就会自动被free掉，所以导致了输出的不正确。<br>而malloc申请的内存是存在在堆中的，这个内存为所有函数共享，只要不手动free就永远可以使用，所以在申请结构体结点的时候应使用malloc而不是直接声明变量。<br>犯这个错的原因就是我想当然地把结构体当成了java里的类，实际上结构体只是和c语言里的int，char一样的数据类型，它们的区别仅仅在于结构体和类一样可以自由地搭配各种类型而已。我想说的是，假设有两个结构体变量a，b，当执行a=b地时候，计算机做的是把b里的各个<strong>数据项</strong>一个个拷贝进a里，而不是把b的地址赋给a。验证如下：<img src="https://wx1.sinaimg.cn/mw690/005PyLUnly1ft8csaa8lkj30o50h23yz.jpg" alt="验证"></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c</a>
+          
+            <a href="/tags/内存作用域/" rel="tag"># 内存作用域</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/01/最近共同祖先/" rel="next" title="最近共同祖先（WordNet）">
+                <i class="fa fa-chevron-left"></i> 最近共同祖先（WordNet）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -739,6 +740,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
 
   
 
